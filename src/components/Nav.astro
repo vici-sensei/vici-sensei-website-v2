@@ -4,8 +4,12 @@ import { Icon } from 'astro-icon/components';
 
 <nav class="site-nav">
   <div class="site-container flex items-center justify-between px-6 py-4">
-    <a href="/" class="text-[1.4rem] font-extrabold text-white flex items-center gap-2 tracking-[-0.5px]">
-      <Icon name="fa6-solid:torii-gate" class="text-accent-red w-[1.3rem] h-[1.3rem]" /> Vici Sensei
+    <a href="/" class="text-[1.4rem] font-extrabold text-white flex items-center gap-2.5 tracking-[-0.5px]">
+      <span class="relative inline-flex items-center justify-center w-8 h-8 border-[1.3px] border-accent-red shrink-0">
+        <span class="absolute inset-[2px] border border-accent-red opacity-50"></span>
+        <Icon name="fa6-solid:torii-gate" class="relative text-accent-red w-[1rem] h-[1rem]" />
+      </span>
+      Vici Sensei
     </a>
 
     <div class="nav-links" id="navLinks">

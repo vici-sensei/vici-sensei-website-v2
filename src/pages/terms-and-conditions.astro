@@ -3,18 +3,18 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
 <BaseLayout
-  title="Terms and Conditions — Vici Sensei"
-  description="The terms and conditions governing your use of the Vici Sensei website and mentorship program."
+  title="Terms of Service — Vici Sensei"
+  description="The terms of service governing your use of the Vici Sensei website and mentorship program."
 >
   <section class="section-padding">
     <div class="container-narrow">
       <div class="header-center">
         <span class="badge">LEGAL</span>
-        <h1 class="main-title">Terms and Conditions</h1>
+        <h1 class="main-title">Terms of Service</h1>
         <p class="subtitle">The terms governing your use of this website and your enrollment in the Vici Sensei mentorship program.</p>
       </div>
 
-      <p class="legal-updated">Last updated: July 20, 2026</p>
+      <p class="legal-updated">Last updated: August 8, 2026</p>
 
       <div class="legal-content">
         <h2>1. Company Information</h2>
@@ -33,30 +33,39 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         </div>
 
         <h2>2. Acceptance of These Terms</h2>
-        <p>By accessing this website or enrolling in the mentorship program, you agree to be bound by these Terms and Conditions. If you do not agree with any part of these terms, please do not use our Services.</p>
+        <p>By accessing this website or enrolling in the mentorship program, you agree to be bound by these Terms of Service. If you do not agree with any part of these terms, please do not use our Services.</p>
 
         <h2>3. Description of Services</h2>
         <p>We provide live, small-group Japanese language mentorship sessions, JLPT-focused practice, a personalized study roadmap, and access to a custom kanji and vocabulary app with spaced repetition, delivered on a recurring 4-week cycle.</p>
 
         <h2>4. Enrollment and Payment</h2>
         <ul>
-          <li>Enrollment is initiated by contacting us through Discord, WhatsApp, or email, as described on our website.</li>
-          <li>The mentorship program is billed on a recurring 4-week cycle. Pricing is displayed in RON, EUR, or USD depending on your location, and is subject to change with reasonable notice for future cycles.</li>
-          <li>Payment may be made by bank transfer to the account listed in Section 1, or by any other method we make available at the time of enrollment.</li>
+          <li>Enrollment is completed by selecting a subscription plan and paying through our secure checkout page, operated by our payment processor, Stripe. At checkout, you will be asked to expressly accept these Terms before completing payment.</li>
+          <li>The mentorship program is billed on a recurring 4-week cycle that renews automatically until cancelled. Three subscription plans are available, depending on the language of instruction and your location:
+            <ul>
+              <li>440 RON, billed every 4 weeks, for sessions delivered in Romanian;</li>
+              <li>119 USD, billed every 4 weeks, for sessions delivered in English;</li>
+              <li>119 EUR, billed every 4 weeks, for students located within the European Union.</li>
+            </ul>
+          </li>
+          <li>These prices do not include VAT, as Kitsunebi Miyabi SRL is not a VAT payer ("neplătitoare de TVA") under Romanian law. Pricing is subject to change with reasonable notice for future billing cycles.</li>
+          <li>Payment is processed securely by Stripe. We do not collect or store your full card details; see our <a href="/privacy-policy" class="highlight">Privacy Policy</a> for details on how payment data is handled.</li>
+          <li>By completing a subscription purchase, you authorize us to charge your chosen payment method every 4 weeks until you cancel in accordance with Section 5. You will receive an invoice by email after each successful payment.</li>
           <li>Access to live sessions and the vocab app for a given cycle is conditional on payment for that cycle being received.</li>
         </ul>
 
         <h2>5. Cancellation and Right of Withdrawal</h2>
-        <p>You may cancel your subscription at any time, effective at the end of the current 4-week cycle. Cancellation does not entitle you to a refund for sessions already delivered or for the portion of the cycle already elapsed.</p>
-        <p>If you are a consumer entering into this contract at a distance, Romanian law (GEO no. 34/2014) grants you the right to withdraw from the contract within 14 calendar days without giving any reason. However, where you request that live sessions begin before the end of this 14-day period, you acknowledge and expressly agree that you lose the right of withdrawal once the service has been fully performed, in accordance with the exceptions provided by that law.</p>
-        <p>You may exercise your right of withdrawal, where applicable, by contacting us at <strong class="highlight text-red-300">vici.sensei@gmail.com</strong>.</p>
+        <p>You may cancel your subscription at any time by contacting us at <strong class="highlight text-red-300">vici.sensei@gmail.com</strong>. Cancelling stops future renewals only: you retain full access to live sessions and the vocab app for the remainder of the 4-week cycle you have already paid for, and your payment method will not be charged again after that. Cancellation does not entitle you to a refund for the current cycle or any previous cycle, whether or not you attended all scheduled sessions.</p>
+        <p>If you are a consumer entering into this contract at a distance, Romanian law (GEO no. 34/2014) grants you the right to withdraw from the contract within 14 calendar days without giving any reason. By checking the box to accept these Terms and completing payment on our checkout page before this 14-day period has elapsed, you expressly request that we begin performing the Services immediately, and you acknowledge and agree that you lose the right of withdrawal once the corresponding live session(s) have been fully delivered, in accordance with the exceptions provided by that law.</p>
+        <p>You may exercise your right of withdrawal, where it still applies, by contacting us at <strong class="highlight text-red-300">vici.sensei@gmail.com</strong>.</p>
 
         <h2>6. Your Responsibilities</h2>
         <ul>
           <li>Provide accurate contact and billing information;</li>
-          <li>Attend scheduled live sessions and communicate promptly regarding rescheduling needs;</li>
+          <li>Attend your scheduled weekly live session at its fixed time. Because sessions are delivered in a small-group format shared with other students, missed sessions cannot be rescheduled or made up, and no refund or credit is given for a session you did not attend;</li>
           <li>Ensure you have the equipment and internet connection necessary to join live sessions on the platform used to host them;</li>
-          <li>Use the kanji and vocabulary app for your own personal, non-commercial study only.</li>
+          <li>Use the kanji and vocabulary app for your own personal, non-commercial study only;</li>
+          <li>Not disclose to anyone outside your group any personal information you learn about other participants during group sessions.</li>
         </ul>
 
         <h2>7. Intellectual Property</h2>
@@ -68,19 +77,22 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <h2>9. Limitation of Liability</h2>
         <p>To the maximum extent permitted by law, Kitsunebi Miyabi SRL shall not be liable for any indirect, incidental, or consequential damages arising from your use of the Services. Our total liability for any claim arising from these Terms shall not exceed the amount you have paid for the current subscription cycle. Nothing in these Terms limits any liability that cannot be limited under applicable Romanian consumer protection law.</p>
 
-        <h2>10. Termination</h2>
+        <h2>10. Force Majeure</h2>
+        <p>Neither party shall be liable for any failure or delay in performing its obligations under these Terms where this results from circumstances beyond that party's reasonable control, including fires, natural disasters, war, internet or platform outages, or medical emergencies ("Force Majeure Event"). Where a Force Majeure Event prevents either party from starting, continuing, or completing the Services, either party may terminate the affected subscription without penalty. This section does not affect your statutory rights as a consumer.</p>
+
+        <h2>11. Termination</h2>
         <p>We may suspend or terminate your access to the Services if you breach these Terms or fail to make payment for a subscription cycle. You may terminate your enrollment at any time in accordance with Section 5.</p>
 
-        <h2>11. Complaints and Alternative Dispute Resolution</h2>
+        <h2>12. Complaints and Alternative Dispute Resolution</h2>
         <p>If you have a complaint, please contact us first at <strong class="highlight text-red-300">vici.sensei@gmail.com</strong> so we can try to resolve it directly. As a consumer, you are also entitled to use the Alternative Dispute Resolution (SAL) platform operated by the Romanian National Authority for Consumer Protection (ANPC), accessible at <a href="https://reclamatiisal.anpc.ro/" target="_blank" rel="noopener noreferrer" class="highlight">reclamatiisal.anpc.ro</a>, as well as the European Commission's Online Dispute Resolution platform.</p>
 
-        <h2>12. Governing Law</h2>
+        <h2>13. Governing Law</h2>
         <p>These Terms are governed by Romanian law. Any dispute that cannot be resolved amicably or through the SAL platform referenced above shall be submitted to the competent courts of Romania.</p>
 
-        <h2>13. Changes to These Terms</h2>
+        <h2>14. Changes to These Terms</h2>
         <p>We may update these Terms from time to time. The "Last updated" date at the top of this page indicates when they were last revised. Continued use of our Services after an update constitutes acceptance of the revised Terms.</p>
 
-        <h2>14. Contact Us</h2>
+        <h2>15. Contact Us</h2>
         <p>For any questions about these Terms, please contact us at <strong class="highlight text-red-300">vici.sensei@gmail.com</strong> or <strong class="highlight text-red-300">+40 745 984 726</strong>.</p>
       </div>
     </div>

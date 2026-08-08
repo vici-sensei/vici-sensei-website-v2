@@ -12,7 +12,7 @@ export const faqItems: FaqEntry[] = [
   {
     question: 'How is the payment managed?',
     answer:
-      'Payment is made once every 4 weeks, in advance, <strong>only after</strong> signing the contract and issuing the first invoice. It is securely completed via bank transfer (or Stripe, if available).',
+      'Payment is made once every 4 weeks, in advance, through our secure Stripe checkout page, where you also accept our Terms of Service. Your subscription renews automatically every 4 weeks until you cancel, and you receive an invoice by email after each payment.',
   },
   {
     question: 'What happens if I can’t attend a scheduled session?',

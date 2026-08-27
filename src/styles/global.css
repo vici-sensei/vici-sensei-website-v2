@@ -380,9 +380,22 @@
     border-color: rgb(255 255 255 / 0.1);
     box-shadow: inset 0 0 10px rgb(255 255 255 / 0.05);
   }
+  .testimonial-quote-title {
+    @apply mb-2.5 pl-3 text-[0.95rem] leading-[1.4] font-bold text-text-muted not-italic;
+    border-left: 2px solid var(--color-border-soft);
+  }
+  .testimonial-quote-title-modal {
+    @apply mb-4 text-center text-[0.95rem] leading-[1.4] font-bold text-text-muted not-italic;
+  }
   .testimonial-quote {
     @apply min-h-[60px] pl-3 text-[0.95rem] leading-[1.5] text-text-muted italic;
     border-left: 2px solid var(--color-border-soft);
+  }
+  .testimonial-quote-para {
+    margin-bottom: 0.6em;
+  }
+  .testimonial-quote-para:last-child {
+    margin-bottom: 0;
   }
   .testimonial-mobile-actions {
     display: none;
@@ -437,7 +450,7 @@
     transition: transform 0.25s ease;
   }
   .testimonial-modal.open {
-    @apply flex translate-y-0;
+    @apply flex translate-y-0 gap-0;
   }
   .testimonial-modal-close {
     @apply absolute top-4 right-4 flex h-8 w-8 items-center justify-center rounded-full text-text-muted;

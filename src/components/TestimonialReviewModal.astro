@@ -8,6 +8,8 @@ export interface Props {
   flag: string;
   role: string;
   roleClass?: string;
+  quoteTitle?: string;
+  quoteTitleOriginal?: string;
   quote: string;
   translated?: boolean;
   quoteOriginal?: string;
@@ -21,6 +23,8 @@ const {
   flag,
   role,
   roleClass = 'text-accent-blue',
+  quoteTitle,
+  quoteTitleOriginal,
   quote,
   translated = false,
   quoteOriginal,
@@ -57,7 +61,7 @@ const {
       <p class={`text-[0.85rem] font-semibold ${roleClass}`}>{role}</p>
     </div>
   </div>
-  <div class="flex items-center gap-1" aria-label="5 out of 5 stars">
+  <div class="flex items-center gap-1 mt-2" aria-label="5 out of 5 stars">
     {
       Array.from({ length: 5 }).map(() => (
         <Icon name="mdi:star" class="h-[18px] w-[18px] text-accent-gold" aria-hidden="true" />
@@ -65,11 +69,11 @@ const {
     }
     <span class="ml-1.5 text-[0.85rem] font-bold text-text-muted">5.0/5.0</span>
   </div>
-  <div class="quote-block flex flex-col gap-2">
+  <div class="quote-block flex flex-col">
     {
       translated && (
-        <span class="flex flex-wrap items-center justify-between gap-x-2 gap-y-0.5 text-[0.75rem] text-white/25">
-          <span>(Translated from Japanese)</span>
+        <span class="mt-8 flex flex-wrap items-center justify-between gap-x-2 gap-y-0.5 text-[0.75rem] text-white/25">
+          <span class="translated-label">(Translated from Japanese)</span>
           <button
             type="button"
             class="see-original-btn shrink-0 cursor-pointer bg-transparent p-0 font-bold text-white/25 hover:text-white/30 hover:underline"
@@ -80,10 +84,21 @@ const {
         </span>
       )
     }
-    <p class="text-[1rem] leading-[1.6] text-text-muted italic">
-      <span class="quote-text" data-translated={quote} data-original={quoteOriginal}>
-        {quote}
-      </span>
-    </p>
+    {
+      quoteTitle && (
+        <p class="testimonial-quote-title-modal text-[0.95rem]">
+          <span class="quote-title-text" data-translated={quoteTitle} data-original={quoteTitleOriginal}>
+            {quoteTitle}
+          </span>
+        </p>
+      )
+    }
+    <div
+      class="quote-paragraphs text-[1rem] leading-[1.6] text-text-muted italic"
+      data-translated={quote}
+      data-original={quoteOriginal}
+    >
+      {quote.split('\n\n').map((paragraph) => <p class="testimonial-quote-para">{paragraph}</p>)}
+    </div>
   </div>
 </div>

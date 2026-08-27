@@ -499,9 +499,31 @@ const longCards = cards.filter((c) => c.isLong);
       if (index === undefined) return
       const showOriginal = btn.dataset.state !== 'original'
       document.querySelectorAll(`[data-index="${index}"] .see-original-btn`).forEach((b) => {
-        const quoteText = b.closest('.testimonial-card, .testimonial-modal')?.querySelector('.quote-text')
-        if (!quoteText) return
-        quoteText.textContent = showOriginal ? quoteText.dataset.original : quoteText.dataset.translated
+        const container = b.closest('.testimonial-card, .testimonial-modal')
+        if (!container) return
+        const quoteText = container.querySelector('.quote-text')
+        if (quoteText) {
+          quoteText.textContent = showOriginal ? quoteText.dataset.original : quoteText.dataset.translated
+        }
+        const quoteParagraphs = container.querySelector('.quote-paragraphs')
+        if (quoteParagraphs) {
+          const text = showOriginal ? quoteParagraphs.dataset.original : quoteParagraphs.dataset.translated
+          quoteParagraphs.innerHTML = ''
+          text.split('\n\n').forEach((paragraph) => {
+            const p = document.createElement('p')
+            p.className = 'testimonial-quote-para'
+            p.textContent = paragraph
+            quoteParagraphs.appendChild(p)
+          })
+        }
+        const titleText = container.querySelector('.quote-title-text')
+        if (titleText && titleText.dataset.original) {
+          titleText.textContent = showOriginal ? titleText.dataset.original : titleText.dataset.translated
+        }
+        const translatedLabel = container.querySelector('.translated-label')
+        if (translatedLabel) {
+          translatedLabel.style.visibility = showOriginal ? 'hidden' : 'visible'
+        }
         b.dataset.state = showOriginal ? 'original' : 'translated'
         b.textContent = showOriginal ? 'see translation' : 'see original'
       })

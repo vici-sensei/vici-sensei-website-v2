@@ -8,6 +8,8 @@ export interface Props {
   flag: string;
   role: string;
   roleClass?: string;
+  quoteTitle?: string;
+  quoteTitleOriginal?: string;
   quote: string;
   translated?: boolean;
   quoteOriginal?: string;
@@ -22,6 +24,8 @@ const {
   flag,
   role,
   roleClass = 'text-accent-blue',
+  quoteTitle,
+  quoteTitleOriginal,
   quote,
   translated = false,
   quoteOriginal,
@@ -60,6 +64,15 @@ const {
     <span class="ml-1.5 text-[0.85rem] font-bold text-text-muted">5.0/5.0</span>
   </div>
   <div class="quote-block">
+    {
+      quoteTitle && (
+        <p class="testimonial-quote-title">
+          <span class="quote-title-text" data-translated={quoteTitle} data-original={quoteTitleOriginal}>
+            {quoteTitle}
+          </span>
+        </p>
+      )
+    }
     <p class:list={['testimonial-quote', { 'line-clamp-4': isLong }]}>
       <span class="quote-text" data-translated={quote} data-original={quoteOriginal}>
         {quote}
@@ -68,7 +81,7 @@ const {
     {
       translated && (
         <span class="mt-1 flex flex-wrap items-center justify-between gap-x-2 gap-y-0.5 text-[0.75rem] text-white/25">
-          <span>(Translated from Japanese)</span>
+          <span class="translated-label">(Translated from Japanese)</span>
           <button
             type="button"
             class="see-original-btn shrink-0 cursor-pointer bg-transparent p-0 font-bold text-white/25 hover:text-white/30 hover:underline"

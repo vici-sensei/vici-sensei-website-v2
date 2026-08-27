@@ -8,11 +8,31 @@
 
 <script>
   const floatingCta = document.getElementById('floatingCta');
-  window.addEventListener('scroll', () => {
+  const pricingSection = document.getElementById('pricing');
+
+  let isOnPricing = false;
+
+  function updateVisibility() {
+    if (isOnPricing) {
+      floatingCta?.classList.remove('reveal');
+      return;
+    }
     if (window.scrollY > 450) {
       floatingCta?.classList.add('reveal');
     } else {
       floatingCta?.classList.remove('reveal');
     }
-  });
+  }
+
+  if (pricingSection) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        isOnPricing = entry.isIntersecting;
+        updateVisibility();
+      });
+    });
+    observer.observe(pricingSection);
+  }
+
+  window.addEventListener('scroll', updateVisibility);
 </script>

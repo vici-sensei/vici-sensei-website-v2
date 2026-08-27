@@ -92,10 +92,6 @@
     @apply text-white font-semibold rounded px-1.5 py-0.5;
     background: linear-gradient(120deg, rgb(255 255 255 / 0.1) 0%, rgb(255 255 255 / 0) 100%);
   }
-  .highlight.blue {
-    @apply font-bold;
-    color: var(--color-accent-blue);
-  }
   .badge.blue {
     background: rgb(0 210 255 / 0.1);
     border-color: rgb(0 210 255 / 0.3);
@@ -450,6 +446,36 @@
   .testimonial-modal-close:hover {
     @apply text-white;
     background: rgb(255 255 255 / 0.08);
+  }
+
+  /* PRICING SWITCHER */
+  .plan-switcher {
+    @apply flex gap-3 mb-6;
+  }
+  .plan-switcher-btn {
+    @apply relative flex-1 rounded-2xl px-3 py-3 text-[1rem] font-bold text-text-muted cursor-pointer border;
+    background: var(--color-bg-cards);
+    border-color: var(--color-border-soft);
+    box-shadow: 0 6px 14px rgb(0 0 0 / 0.3);
+    font-family: inherit;
+    transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+  }
+  .plan-switcher-btn:hover {
+    @apply text-white;
+  }
+  .plan-switcher-btn[aria-selected="true"] {
+    @apply text-white;
+    border-color: var(--color-accent-red);
+    background: rgb(255 74 90 / 0.1);
+    box-shadow: 0 8px 20px rgb(255 74 90 / 0.25);
+  }
+  .plan-switcher-price {
+    @apply text-[0.85rem] font-bold;
+    color: rgb(255 255 255 / 0.8);
+    font-variant-numeric: tabular-nums;
+  }
+  .plan-switcher-btn[aria-selected="true"] .plan-switcher-price {
+    color: inherit;
   }
 
   /* FAQ ACCORDION */

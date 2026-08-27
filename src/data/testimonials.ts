@@ -36,10 +36,10 @@ export interface TestimonialItem {
 // - 'game-icons:samurai-helmet'
 // - 'game-icons:shuriken'
 
-// flag:
-// - 'JP'
-// - 'US'
-// - 'RO'
+// flag (Iconify icon name from the flagpack set):
+// - 'flagpack:jp'
+// - 'flagpack:us'
+// - 'flagpack:ro'
 
 // role:
 // - 'Native Speaker / Friend'
@@ -78,33 +78,17 @@ export const testimonials: TestimonialItem[] = [
     photo: 'Sheldon.jpeg',
     icon: 'hugeicons:sakura',
     name: 'Sheldon',
-    flag: '...',
+    flag: 'flagpack:us',
     role: 'Student',
     quote:
       `"Vincent has a wonderfully unique personality that brings out the joy in language learning. His ability to communicate information while adjusting to your level is a rare skill to have. I\'ve yet to see him shy away from any questions, no matter how simple or complex. He goes above and beyond by teaching more than just a set of rules and vocabulary. He truly tries to convey Japanese as Japanese, to understand it as it is."`,
   },
 
-  // Faru
-  {
-    photo: 'Faru.jpeg',
-    icon: 'healthicons:temple',
-    name: 'Hirokazu',
-    flag: 'JP',
-    role: 'Native Speaker / Friend',
-    roleClass: 'text-accent-red',
-    quoteTitle: '"Especially recommended for those who want a theoretical understanding of grammar."',
-    quoteTitleOriginal: '「特に、文法を理論的に理解したい方におすすめです。」',
-    quote:
-      `"I've been friends with Vincent for over 10 years. I've known him since back when he could barely speak Japanese.\nEven as a native Japanese speaker, I've studied Japanese together with him over the years, and I've been truly amazed by his progress. Nowadays, when he talks with Japanese people, they often don't even realize he's a foreigner — his Japanese is that natural (lol).\nSince I'm a native speaker, I usually understand "why we use this expression" intuitively, and I often find it difficult to explain grammar from the ground up.\nVincent, on the other hand, has spent a long time analyzing Japanese as a learner himself, so I think he's a teacher who can explain not just by rote memorization, but theoretically — the "why" behind things.\nI also teach Japanese as a volunteer myself, but being a native speaker means I tend to rely on intuition. I believe Vincent can teach from the learner's perspective, in a way that's clear and systematic.\nFor anyone who wants to learn Japanese while thoroughly understanding the mechanics of its grammar, he's an especially recommended teacher."`,
-    translated: true,
-    quoteOriginal:
-      `「ヴィンセントとは10年以上の友人です。まだ彼が日本語をあまり話せなかった頃から知っています。\n日本語ネイティブの私も、これまで一緒に日本語の勉強をしてきましたが、彼の上達には本当に驚きました。今では日本人と話していても、外国人だと気づかないくらい自然に日本語を使っています（笑）。\n私は日本語ネイティブなので、普段は「なぜこの表現を使うのか」を感覚で理解していることが多く、文法を一から説明する難しさを感じることがあります。\nその点、ヴィンセントは日本語学習者として長い間日本語を分析してきた経験があるので、ただ覚えるだけではなく「なぜそうなるのか」を理論的に説明できる先生だと思います。\n私自身もボランティアで日本語を教えていますが、ネイティブだからこそ感覚に頼ってしまう部分があります。ヴィンセントなら、学習者の目線に立って、分かりやすく体系的に教えてくれると思います。\n文法の仕組みをしっかり理解しながら日本語を学びたい方には、特におすすめの先生です。」`,
-  },
-
+  // Yobu
   {
     icon: 'healthicons:temple',
     name: 'Yobu',
-    flag: 'JP',
+    flag: 'flagpack:jp',
     role: 'Native Speaker / Friend',
     roleClass: 'text-accent-red',
     quoteTitle: '"Let me introduce my friend Vincent."',
@@ -114,6 +98,23 @@ export const testimonials: TestimonialItem[] = [
     translated: true,
     quoteOriginal:
       `「彼と私はそれなりに長い間友人関係です、なので彼が日本語について慎重にそして継続的に学んできたことを知っています。私は彼が日本語を学んでるときに細かいニュアンスについて質問をしてもらったことが数えきれないほどあります。私以外の日本人にも聞いたことがあるでしょう。なのでとても言葉を正確に捉えています。そして、日本語の文法についてはある程度ネイティブより正確に理解していて、場合によっては私の知らないルールについて知っている場合もあります。彼はそれほど日本語を高いレベルで習得しています。\nその話とは少しずれますが、彼は日本のアニメがとても好きです、私と彼が知り合えたのもアニメという共通の趣味があったからです、この文を読んでいるアニメが好きで日本語に興味をもった方是非彼と会話をしてみてください、あなたの知らないアニメキャラのセリフの正しいニュアンスを知ることができるはずです。\n次に、彼はとても正直で誠実な人間です、そしてビジネスライクな人間ではありません。生徒一人一人に寄り添った教え方をしてくれるし、あなたをがっかりさせるようなことは無いと私は考えています。そういう性質があるので、あなたが日本語をある程度理解し始めたらきっと日本語ネイティブと会話をすることを提案するときがあると思います。それは、あなたにとってとても良いチャンスになると思います。実際に彼は、私を含め多くの日本人と会話をしてきました、方法はネット上で知り合うことが多いと思います。私は日本人として、多くの日本人が良い人間だと感じていませんが。彼は日本の文化や日本人について良い印象を持ってくれています。少し話がそれましたが、あなたがもし日本人と会話をしたいと望むなら私もあなたと会話をしたいと感じると思います。もちろん無料です。」`,
+  },
+
+  // Faru
+  {
+    photo: 'Faru.jpeg',
+    icon: 'healthicons:temple',
+    name: 'Hirokazu',
+    flag: 'flagpack:jp',
+    role: 'Native Speaker / Friend',
+    roleClass: 'text-accent-red',
+    quoteTitle: '"Especially recommended for those who want a theoretical understanding of grammar."',
+    quoteTitleOriginal: '「特に、文法を理論的に理解したい方におすすめです。」',
+    quote:
+      `"I've been friends with Vincent for over 10 years. I've known him since back when he could barely speak Japanese.\nEven as a native Japanese speaker, I've studied Japanese together with him over the years, and I've been truly amazed by his progress. Nowadays, when he talks with Japanese people, they often don't even realize he's a foreigner — his Japanese is that natural (lol).\nSince I'm a native speaker, I usually understand "why we use this expression" intuitively, and I often find it difficult to explain grammar from the ground up.\nVincent, on the other hand, has spent a long time analyzing Japanese as a learner himself, so I think he's a teacher who can explain not just by rote memorization, but theoretically — the "why" behind things.\nI also teach Japanese as a volunteer myself, but being a native speaker means I tend to rely on intuition. I believe Vincent can teach from the learner's perspective, in a way that's clear and systematic.\nFor anyone who wants to learn Japanese while thoroughly understanding the mechanics of its grammar, he's an especially recommended teacher."`,
+    translated: true,
+    quoteOriginal:
+      `「ヴィンセントとは10年以上の友人です。まだ彼が日本語をあまり話せなかった頃から知っています。\n日本語ネイティブの私も、これまで一緒に日本語の勉強をしてきましたが、彼の上達には本当に驚きました。今では日本人と話していても、外国人だと気づかないくらい自然に日本語を使っています（笑）。\n私は日本語ネイティブなので、普段は「なぜこの表現を使うのか」を感覚で理解していることが多く、文法を一から説明する難しさを感じることがあります。\nその点、ヴィンセントは日本語学習者として長い間日本語を分析してきた経験があるので、ただ覚えるだけではなく「なぜそうなるのか」を理論的に説明できる先生だと思います。\n私自身もボランティアで日本語を教えていますが、ネイティブだからこそ感覚に頼ってしまう部分があります。ヴィンセントなら、学習者の目線に立って、分かりやすく体系的に教えてくれると思います。\n文法の仕組みをしっかり理解しながら日本語を学びたい方には、特におすすめの先生です。」`,
   },
 
   // example:

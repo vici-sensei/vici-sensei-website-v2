@@ -21,7 +21,7 @@ const { badge, icon, accent, title, description, current = false, destination = 
     <div class="pill-header">
       <div class="card-icon"><Icon name={icon} /></div>
       <div class="card-title-row">
-        <h3>{title}</h3>
+        <div class="title">{title}</div>
         <div class:list={['card-badge', { current }]}>{badge}</div>
       </div>
     </div>
@@ -29,7 +29,7 @@ const { badge, icon, accent, title, description, current = false, destination = 
     <button class="pill-trigger" aria-expanded="false">
       <div class="card-icon"><Icon name={icon} /></div>
       <div class="card-title-row">
-        <h3>{title}</h3>
+        <div class="title">{title}</div>
         <div class:list={['card-badge', { current }]}>{badge}</div>
       </div>
       <span class="pill-chevron" aria-hidden="true"></span>

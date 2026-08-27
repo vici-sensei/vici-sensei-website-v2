@@ -272,7 +272,7 @@
 
   /* ROADMAP TIMELINE */
   .glow-timeline {
-    @apply relative flex flex-col gap-3.5 pl-14 max-md:pl-[50px];
+    @apply relative flex flex-col gap-3.5 pl-14 max-md:pl-[28px];
   }
   .timeline-line {
     @apply absolute w-0.5;
@@ -289,7 +289,7 @@
   }
   @media (max-width: 768px) {
     .timeline-line {
-      left: 17px;
+      left: 6px;
     }
   }
   .roadmap-card {
@@ -373,22 +373,35 @@
 
   @media (max-width: 768px) {
     .card-icon {
-      left: -50px;
-      width: 34px;
-      height: 34px;
+      left: -27px;
+      width: 10px;
+      height: 10px;
+      background: var(--accent-glow);
+      border: none;
+      box-shadow: 0 0 6px var(--accent-glow);
     }
     .card-icon svg {
-      @apply w-[18px] h-[18px];
+      display: none;
     }
     .card-title-row {
-      @apply flex-col items-start gap-2;
+      @apply flex-row items-center flex-nowrap gap-2;
+    }
+    .card-title-row h3 {
+      @apply min-w-0 flex-1;
     }
     .card-badge {
       order: -1;
     }
+    .pill-trigger,
+    .pill-header {
+      padding: 7px 8px;
+    }
+    .pill-body-inner {
+      padding: 9px 16px 16px 16px;
+    }
   }
-  .roadmap-card h3 {
-    @apply text-white font-bold text-[1.4rem] tracking-[-0.5px];
+  .roadmap-card .title {
+    @apply text-white font-bold md:text-2xl;
   }
   .roadmap-card p {
     @apply text-text-muted text-[1.05rem] leading-[1.6];

@@ -3,27 +3,99 @@
 
 <script>
   const elementsToGlow = document.querySelectorAll('.method-card, .roadmap-card');
+  // Real mouse with hover, not a touch/mobile device — avoids iOS's "sticky hover on tap" quirk.
+  const supportsHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  // How far past a card's edge the mouse can be and still count as "hovering" it —
+  // bridges the small gaps between cards so the glow doesn't drop out between them.
+  const hoverBridge = 48;
 
-  function checkCenterGlow() {
+  let hoveredElement = null;
+
+  function applyGlow(activeElement) {
+    elementsToGlow.forEach((element) => {
+      element.classList.toggle('active-glow', element === activeElement);
+    });
+  }
+
+  function updateFromScroll() {
+    if (hoveredElement) return; // hovered card takes priority over scroll position
+
     const screenCenter = window.innerHeight / 2;
     const detectionTolerance = 150;
+
+    let closestElement = null;
+    let closestDistance = Infinity;
 
     elementsToGlow.forEach((element) => {
       const rect = element.getBoundingClientRect();
       const elementCenter = rect.top + rect.height / 2;
       const distanceFromCenter = Math.abs(elementCenter - screenCenter);
 
-      if (distanceFromCenter < detectionTolerance) {
-        element.classList.add('active-glow');
-      } else {
-        element.classList.remove('active-glow');
+      if (distanceFromCenter < detectionTolerance && distanceFromCenter < closestDistance) {
+        closestDistance = distanceFromCenter;
+        closestElement = element;
       }
+    });
+
+    applyGlow(closestElement);
+  }
+
+  if (supportsHover) {
+    let lastX = 0;
+    let lastY = 0;
+    let rafPending = false;
+
+    function updateHover(clientX, clientY) {
+      let nearestElement = null;
+      let nearestDistance = Infinity;
+
+      elementsToGlow.forEach((element) => {
+        const rect = element.getBoundingClientRect();
+        const dx = clientX < rect.left ? rect.left - clientX : clientX > rect.right ? clientX - rect.right : 0;
+        const dy = clientY < rect.top ? rect.top - clientY : clientY > rect.bottom ? clientY - rect.bottom : 0;
+        const distance = Math.hypot(dx, dy);
+
+        if (distance < nearestDistance) {
+          nearestDistance = distance;
+          nearestElement = element;
+        }
+      });
+
+      const newHovered = nearestDistance <= hoverBridge ? nearestElement : null;
+      if (newHovered !== hoveredElement) {
+        hoveredElement = newHovered;
+        if (hoveredElement) {
+          applyGlow(hoveredElement);
+        } else {
+          updateFromScroll();
+        }
+      }
+    }
+
+    window.addEventListener(
+      'mousemove',
+      (event) => {
+        lastX = event.clientX;
+        lastY = event.clientY;
+        if (rafPending) return;
+        rafPending = true;
+        requestAnimationFrame(() => {
+          rafPending = false;
+          updateHover(lastX, lastY);
+        });
+      },
+      { passive: true }
+    );
+
+    document.documentElement.addEventListener('mouseleave', () => {
+      hoveredElement = null;
+      updateFromScroll();
     });
   }
 
-  window.addEventListener('scroll', checkCenterGlow, { passive: true });
-  window.addEventListener('touchmove', checkCenterGlow, { passive: true });
-  window.addEventListener('touchend', checkCenterGlow, { passive: true });
-  window.addEventListener('resize', checkCenterGlow);
-  checkCenterGlow();
+  window.addEventListener('scroll', updateFromScroll, { passive: true });
+  window.addEventListener('touchmove', updateFromScroll, { passive: true });
+  window.addEventListener('touchend', updateFromScroll, { passive: true });
+  window.addEventListener('resize', updateFromScroll);
+  updateFromScroll();
 </script>

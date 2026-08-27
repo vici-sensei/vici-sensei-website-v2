@@ -17,3 +17,22 @@ import { roadmapItems } from '../data/roadmap';
     </div>
   </div>
 </section>
+
+<script>
+  const cards = document.querySelectorAll('.roadmap-card:not(.pinned-open)');
+  cards.forEach((card) => {
+    const trigger = card.querySelector('.pill-trigger');
+    if (!trigger) return;
+    trigger.addEventListener('click', () => {
+      const isOpen = card.classList.contains('open');
+      cards.forEach((c) => {
+        c.classList.remove('open');
+        c.querySelector('.pill-trigger')?.setAttribute('aria-expanded', 'false');
+      });
+      if (!isOpen) {
+        card.classList.add('open');
+        trigger.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
+</script>

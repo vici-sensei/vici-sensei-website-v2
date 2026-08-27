@@ -9,19 +9,33 @@ export interface Props {
   description: string;
   current?: boolean;
   destination?: boolean;
+  pinnedOpen?: boolean;
 }
 
-const { badge, icon, accent, title, description, current = false, destination = false } = Astro.props;
+const { badge, icon, accent, title, description, current = false, destination = false, pinnedOpen = false } = Astro.props;
 ---
 
-<div class:list={['roadmap-card', { 'destination-card': destination }]} style={`--accent-glow: ${accent};`}>
+<div class:list={['roadmap-card', { 'destination-card': destination, 'pinned-open': pinnedOpen }]} style={`--accent-glow: ${accent};`}>
   <div class="card-glow"></div>
-  <div class="card-icon"><Icon name={icon} /></div>
-  <div class="card-body">
-    <div class="card-title-row">
-      <h3>{title}</h3>
-      <div class:list={['card-badge', { current }]}>{badge}</div>
+  {pinnedOpen ? (
+    <div class="pill-header">
+      <div class="card-icon"><Icon name={icon} /></div>
+      <div class="card-title-row">
+        <h3>{title}</h3>
+        <div class:list={['card-badge', { current }]}>{badge}</div>
+      </div>
     </div>
-    <p set:html={description} />
+  ) : (
+    <button class="pill-trigger" aria-expanded="false">
+      <div class="card-icon"><Icon name={icon} /></div>
+      <div class="card-title-row">
+        <h3>{title}</h3>
+        <div class:list={['card-badge', { current }]}>{badge}</div>
+      </div>
+      <span class="pill-chevron" aria-hidden="true"></span>
+    </button>
+  )}
+  <div class="pill-body">
+    <p class="pill-body-inner" set:html={description} />
   </div>
 </div>

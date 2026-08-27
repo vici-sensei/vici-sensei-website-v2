@@ -112,10 +112,12 @@
     opacity: 1 !important;
     box-shadow: 0 10px 30px -10px var(--accent-blue) !important;
   }
-  .roadmap-card.active-glow {
+  .roadmap-card.active-glow,
+  .roadmap-card.open {
     border-color: var(--accent-glow) !important;
   }
-  .roadmap-card.active-glow .card-glow {
+  .roadmap-card.active-glow .card-glow,
+  .roadmap-card.open .card-glow {
     opacity: 1 !important;
     box-shadow: 0 10px 30px -10px var(--accent-glow) !important;
   }
@@ -270,7 +272,7 @@
 
   /* ROADMAP TIMELINE */
   .glow-timeline {
-    @apply relative flex flex-col gap-10 pl-14 max-md:pl-[50px];
+    @apply relative flex flex-col gap-3.5 pl-14 max-md:pl-[50px];
   }
   .timeline-line {
     @apply absolute w-0.5;
@@ -291,12 +293,16 @@
     }
   }
   .roadmap-card {
-    @apply relative bg-bg-cards border border-border-soft rounded-2xl p-7;
+    @apply relative bg-bg-cards border border-border-soft rounded-2xl;
     backdrop-filter: blur(10px);
-    transition: transform 0.4s ease, border-color 0.4s ease-in-out;
+    transition: border-color 0.3s ease-in-out;
+  }
+  .roadmap-card.open,
+  .roadmap-card.pinned-open {
+    border-color: rgb(255 255 255 / 0.15);
   }
   .card-title-row {
-    @apply flex items-center flex-wrap gap-3 mb-2.5;
+    @apply flex items-center flex-wrap gap-3;
   }
   .card-badge {
     @apply font-extrabold text-[0.9rem] text-white rounded-lg px-3.5 py-1.5 shrink-0;
@@ -311,6 +317,8 @@
   .card-icon {
     @apply absolute w-[42px] h-[42px] rounded-full flex items-center justify-center z-[2];
     left: -57px;
+    top: 50%;
+    transform: translateY(-50%);
     background: var(--color-bg-main);
     border: 2px solid var(--accent-glow);
     box-shadow: 0 0 10px var(--accent-glow);
@@ -319,6 +327,50 @@
     @apply w-[20px] h-[20px];
     color: var(--accent-glow);
   }
+
+  /* pill trigger / header — the always-visible row (icon + year + title) */
+  .pill-trigger {
+    all: unset;
+    cursor: pointer;
+  }
+  .pill-trigger,
+  .pill-header {
+    @apply relative flex items-center gap-3.5 w-full box-border;
+    padding: 22px 24px;
+  }
+  .pill-chevron {
+    @apply shrink-0;
+    margin-left: auto;
+    width: 9px;
+    height: 9px;
+    border-right: 2px solid var(--color-text-muted);
+    border-bottom: 2px solid var(--color-text-muted);
+    transform: rotate(45deg);
+    transition: transform 0.3s ease, border-color 0.2s ease;
+  }
+  .roadmap-card.open .pill-chevron {
+    transform: rotate(-135deg);
+    border-color: var(--accent-glow);
+  }
+
+  /* pill body — the description, collapsed unless .open or .pinned-open */
+  .pill-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s cubic-bezier(0, 1, 0, 1);
+  }
+  .roadmap-card.open .pill-body {
+    max-height: 300px;
+    transition: max-height 0.35s cubic-bezier(1, 0, 1, 0);
+  }
+  .roadmap-card.pinned-open .pill-body {
+    max-height: none;
+    overflow: visible;
+  }
+  .pill-body-inner {
+    padding: 0 24px 24px 24px;
+  }
+
   @media (max-width: 768px) {
     .card-icon {
       left: -50px;

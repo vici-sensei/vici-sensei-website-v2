@@ -6,6 +6,8 @@ export interface RoadmapItem {
   description: string;
   current?: boolean;
   destination?: boolean;
+  /** Always expanded, never collapses — pick a few key milestones to keep visible by default. */
+  pinnedOpen?: boolean;
 }
 
 export const roadmapItems: RoadmapItem[] = [
@@ -104,6 +106,7 @@ export const roadmapItems: RoadmapItem[] = [
     title: 'Continuing the Mission',
     current: true,
     destination: true,
+    pinnedOpen: true,
     description:
       'Having been <span class="highlight">studying Japanese for over 11 years</span> and <span class="highlight">teaching it for 8 years</span>, I continue to teach Japanese to students all around the world, bringing them from total beginners to full-fledged speakers of the language.',
   },

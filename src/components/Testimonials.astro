@@ -437,14 +437,47 @@ const longCards = cards.filter((c) => c.isLong);
     if (isMouseDragging) onMouseUp()
   })
 
+  // ── Quote clamp fill ──────────────────────────────────────
+  // All cards sit in one non-wrapping flex row, so they stretch to match the
+  // tallest card in the whole track. A card with less surrounding content
+  // (no quoteTitle, no "translated" row, etc.) ends up with blank space below
+  // its clamped quote. Grow that card's line-clamp by exactly the number of
+  // extra lines its already-existing slack can fit, so real text fills the
+  // space instead of empty padding — never taller than the current stretch
+  // height, so the card height everyone already likes doesn't change.
+  function adjustQuoteClamp() {
+    document.querySelectorAll('.testimonial-card.has-more').forEach((card) => {
+      const quoteEl = card.querySelector('.testimonial-quote')
+      const btn = card.querySelector('.see-more-btn')
+      if (!quoteEl || !btn) return
+
+      quoteEl.style.webkitLineClamp = '4'
+
+      const paddingBottom = parseFloat(getComputedStyle(card).paddingBottom) || 0
+      const cardContentBottom = card.getBoundingClientRect().bottom - paddingBottom
+      const blankSpace = cardContentBottom - btn.getBoundingClientRect().bottom
+
+      const lineHeight = parseFloat(getComputedStyle(quoteEl).lineHeight) || 0
+      if (lineHeight <= 0 || blankSpace <= 0) return
+
+      const extraLines = Math.floor(blankSpace / lineHeight)
+      if (extraLines > 0) {
+        quoteEl.style.webkitLineClamp = String(4 + extraLines)
+      }
+    })
+  }
+
   // ── Init ──────────────────────────────────────────────────
   // Hide the controls instead of leaving arrows/dots that animate in place
   // without going anywhere.
   updateNavAvailability()
   buildDots()
+  adjustQuoteClamp()
+  document.fonts?.ready.then(adjustQuoteClamp)
   window.addEventListener('resize', () => {
     updateNavAvailability()
     buildDots()
+    adjustQuoteClamp()
   })
 
   // ── Review modal ──────────────────────────────────────────

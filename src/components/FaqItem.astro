@@ -10,7 +10,9 @@ const { question, answer } = Astro.props;
 <div class="faq-item">
   <button class="faq-trigger">
     <span>{question}</span>
-    <div class="faq-icon-cross"></div>
+    <div class="flex items-center justify-center w-fit">
+      <div class="faq-icon-cross"></div>
+    </div>
   </button>
   <div class="faq-content">
     <p set:html={answer} />

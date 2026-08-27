@@ -340,7 +340,6 @@
   }
   .pill-chevron {
     @apply shrink-0;
-    margin-left: auto;
     width: 9px;
     height: 9px;
     border-right: 2px solid var(--color-text-muted);
@@ -565,7 +564,7 @@
     transition: border-color 0.2s ease;
   }
   .faq-trigger {
-    @apply w-full p-6 bg-transparent border-none text-left text-white text-[1.15rem] font-bold cursor-pointer flex justify-between items-center;
+    @apply w-full p-6 bg-transparent border-none text-left text-white text-[1.15rem] font-bold cursor-pointer flex gap-4 justify-between items-center;
   }
   .faq-icon-cross {
     @apply w-[18px] h-[18px] relative;

@@ -32,7 +32,9 @@ const { badge, icon, accent, title, description, current = false, destination = 
         <div class="title">{title}</div>
         <div class:list={['card-badge', { current }]}>{badge}</div>
       </div>
-      <span class="pill-chevron" aria-hidden="true"></span>
+      <div class="flex items-center justify-center w-fit p-2 ml-auto">
+        <span class="pill-chevron" aria-hidden="true"></span>
+      </div>
     </button>
   )}
   <div class="pill-body">

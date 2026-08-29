@@ -79,7 +79,7 @@ export const testimonials: TestimonialItem[] = [
     icon: 'hugeicons:sakura',
     name: 'Sheldon',
     flag: 'flagpack:us',
-    role: 'Student',
+    role: 'Student / Intermediate (N3)',
     quote:
       `"Vincent has a wonderfully unique personality that brings out the joy in language learning. His ability to communicate information while adjusting to your level is a rare skill to have. I\'ve yet to see him shy away from any questions, no matter how simple or complex. He goes above and beyond by teaching more than just a set of rules and vocabulary. He truly tries to convey Japanese as Japanese, to understand it as it is."`,
   },

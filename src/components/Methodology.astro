@@ -8,10 +8,14 @@ import { methodologyItems } from '../data/methodology';
     <div class="header-center">
       <span class="badge">WHY WE ARE DIFFERENT</span>
       <h2 class="main-title">The Three-Pillar System</h2>
-      <p class="subtitle">My own structured, three-pillar system designed specifically for analytical minds who need clear rules to master Japanese.</p>
+      <p class="subtitle">My own structured, three-pillar system designed specifically for logical minds who need clear rules to master Japanese.</p>
     </div>
     <div class="grid grid-cols-3 gap-[30px] max-lg:grid-cols-2 max-md:grid-cols-1 max-md:gap-5">
-      {methodologyItems.map((item) => <MethodCard {...item} />)}
+      {methodologyItems.map((item, index) => (
+        <div class:list={[index === methodologyItems.length - 1 && methodologyItems.length % 2 === 1 && 'max-lg:col-span-2 max-lg:max-w-[calc(50%-15px)] max-lg:mx-auto max-md:max-w-none max-md:mx-0']}>
+          <MethodCard {...item} />
+        </div>
+      ))}
     </div>
   </div>
 </section>

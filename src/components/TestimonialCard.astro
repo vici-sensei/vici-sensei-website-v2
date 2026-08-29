@@ -34,6 +34,8 @@ const {
   index,
   isLong,
 } = Astro.props;
+
+const roleTags = role.split(' / ');
 ---
 
 <div class:list={['testimonial-card', { 'has-more': isLong }]} data-index={index}>
@@ -52,7 +54,13 @@ const {
       <h4 class="flex items-center gap-1.5 text-[1.05rem] font-bold text-white">
         {name} <Icon name={flag} class="h-4 w-5 rounded-[3px]" aria-hidden="true" />
       </h4>
-      <p class={`text-[0.85rem] font-semibold ${roleClass}`}>{role}</p>
+      <div class="mt-1 flex flex-wrap gap-1.5">
+        {
+          roleTags.map((tag) => (
+            <span class={`role-tag ${roleClass}`}>{tag}</span>
+          ))
+        }
+      </div>
     </div>
   </div>
   <div class="flex items-center gap-1" aria-label="5 out of 5 stars">

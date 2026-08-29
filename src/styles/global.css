@@ -809,7 +809,10 @@
     transition: border-color 0.3s ease;
   }
   .cookie-widget.expanded {
-    @apply bottom-6 max-xl:bottom-26 max-md:bottom-20;
+    @apply bottom-6;
+  }
+  .floating-cta-bar.reveal ~ .cookie-widget.expanded {
+    @apply max-xl:bottom-26 max-md:bottom-20;
   }
   .cookie-widget.expanded .cookie-trigger {
     border-color: rgb(255 74 90 / 0.35);

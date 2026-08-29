@@ -2,23 +2,44 @@
 ---
 
 <script>
-  const elementsToGlow = document.querySelectorAll('.method-card, .roadmap-card');
+  const methodCards = document.querySelectorAll('.method-card');
+  const roadmapCards = document.querySelectorAll('.roadmap-card');
   // Real mouse with hover, not a touch/mobile device — avoids iOS's "sticky hover on tap" quirk.
   const supportsHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
   // How far past a card's edge the mouse can be and still count as "hovering" it —
   // bridges the small gaps between cards so the glow doesn't drop out between them.
   const hoverBridge = 48;
 
-  let hoveredElement = null;
-
-  function applyGlow(activeElement) {
-    elementsToGlow.forEach((element) => {
+  function setGlow(elements, activeElement) {
+    elements.forEach((element) => {
       element.classList.toggle('active-glow', element === activeElement);
     });
   }
 
-  function updateFromScroll() {
-    if (hoveredElement) return; // hovered card takes priority over scroll position
+  function nearestWithinBridge(elements, clientX, clientY) {
+    let nearestElement = null;
+    let nearestDistance = Infinity;
+
+    elements.forEach((element) => {
+      const rect = element.getBoundingClientRect();
+      const dx = clientX < rect.left ? rect.left - clientX : clientX > rect.right ? clientX - rect.right : 0;
+      const dy = clientY < rect.top ? rect.top - clientY : clientY > rect.bottom ? clientY - rect.bottom : 0;
+      const distance = Math.hypot(dx, dy);
+
+      if (distance < nearestDistance) {
+        nearestDistance = distance;
+        nearestElement = element;
+      }
+    });
+
+    return nearestDistance <= hoverBridge ? nearestElement : null;
+  }
+
+  // --- Roadmap cards: glow follows scroll position (or mouse hover on desktop), one at a time. ---
+  let hoveredRoadmapElement = null;
+
+  function updateRoadmapFromScroll() {
+    if (hoveredRoadmapElement) return; // hovered card takes priority over scroll position
 
     const screenCenter = window.innerHeight / 2;
     const detectionTolerance = 150;
@@ -26,7 +47,7 @@
     let closestElement = null;
     let closestDistance = Infinity;
 
-    elementsToGlow.forEach((element) => {
+    roadmapCards.forEach((element) => {
       const rect = element.getBoundingClientRect();
       const elementCenter = rect.top + rect.height / 2;
       const distanceFromCenter = Math.abs(elementCenter - screenCenter);
@@ -37,38 +58,42 @@
       }
     });
 
-    applyGlow(closestElement);
+    setGlow(roadmapCards, closestElement);
+  }
+
+  // --- Pillar (method) cards: desktop glows on mouse hover only; touch glows every
+  // card currently crossing the screen's vertical center, so more than one can light up at once. ---
+  function updateMethodCardsForTouch() {
+    const screenCenter = window.innerHeight / 2;
+
+    methodCards.forEach((card) => {
+      const rect = card.getBoundingClientRect();
+      const touchesCenter = rect.top <= screenCenter && rect.bottom >= screenCenter;
+      card.classList.toggle('active-glow', touchesCenter);
+    });
   }
 
   if (supportsHover) {
     let lastX = 0;
     let lastY = 0;
     let rafPending = false;
+    let hoveredMethodElement = null;
 
     function updateHover(clientX, clientY) {
-      let nearestElement = null;
-      let nearestDistance = Infinity;
-
-      elementsToGlow.forEach((element) => {
-        const rect = element.getBoundingClientRect();
-        const dx = clientX < rect.left ? rect.left - clientX : clientX > rect.right ? clientX - rect.right : 0;
-        const dy = clientY < rect.top ? rect.top - clientY : clientY > rect.bottom ? clientY - rect.bottom : 0;
-        const distance = Math.hypot(dx, dy);
-
-        if (distance < nearestDistance) {
-          nearestDistance = distance;
-          nearestElement = element;
-        }
-      });
-
-      const newHovered = nearestDistance <= hoverBridge ? nearestElement : null;
-      if (newHovered !== hoveredElement) {
-        hoveredElement = newHovered;
-        if (hoveredElement) {
-          applyGlow(hoveredElement);
+      const newHoveredRoadmap = nearestWithinBridge(roadmapCards, clientX, clientY);
+      if (newHoveredRoadmap !== hoveredRoadmapElement) {
+        hoveredRoadmapElement = newHoveredRoadmap;
+        if (hoveredRoadmapElement) {
+          setGlow(roadmapCards, hoveredRoadmapElement);
         } else {
-          updateFromScroll();
+          updateRoadmapFromScroll();
         }
+      }
+
+      const newHoveredMethod = nearestWithinBridge(methodCards, clientX, clientY);
+      if (newHoveredMethod !== hoveredMethodElement) {
+        hoveredMethodElement = newHoveredMethod;
+        setGlow(methodCards, hoveredMethodElement);
       }
     }
 
@@ -88,14 +113,26 @@
     );
 
     document.documentElement.addEventListener('mouseleave', () => {
-      hoveredElement = null;
-      updateFromScroll();
+      hoveredRoadmapElement = null;
+      updateRoadmapFromScroll();
+      hoveredMethodElement = null;
+      setGlow(methodCards, null);
     });
+  } else {
+    updateMethodCardsForTouch();
+    window.addEventListener('touchmove', updateMethodCardsForTouch, { passive: true });
+    window.addEventListener('touchend', updateMethodCardsForTouch, { passive: true });
   }
 
-  window.addEventListener('scroll', updateFromScroll, { passive: true });
-  window.addEventListener('touchmove', updateFromScroll, { passive: true });
-  window.addEventListener('touchend', updateFromScroll, { passive: true });
-  window.addEventListener('resize', updateFromScroll);
-  updateFromScroll();
+  window.addEventListener('scroll', () => {
+    updateRoadmapFromScroll();
+    if (!supportsHover) updateMethodCardsForTouch();
+  }, { passive: true });
+  window.addEventListener('touchmove', updateRoadmapFromScroll, { passive: true });
+  window.addEventListener('touchend', updateRoadmapFromScroll, { passive: true });
+  window.addEventListener('resize', () => {
+    updateRoadmapFromScroll();
+    if (!supportsHover) updateMethodCardsForTouch();
+  });
+  updateRoadmapFromScroll();
 </script>

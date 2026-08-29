@@ -257,7 +257,7 @@
 
   /* METHODOLOGY */
   .method-card {
-    @apply relative bg-bg-cards border border-border-soft rounded-2xl px-[30px] py-10;
+    @apply relative h-full bg-bg-cards border border-border-soft rounded-2xl px-[30px] py-10;
     backdrop-filter: blur(10px);
     transition: transform 0.4s ease, border-color 0.4s ease-in-out;
   }

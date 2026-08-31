@@ -13,6 +13,10 @@ export interface Props {
   quote: string;
   translated?: boolean;
   quoteOriginal?: string;
+  previewQuote?: string;
+  previewQuoteOriginal?: string;
+  previewCloseMark?: string;
+  previewCloseMarkOriginal?: string;
   icon: string;
   photo?: ImageMetadata;
   index: number;
@@ -29,6 +33,10 @@ const {
   quote,
   translated = false,
   quoteOriginal,
+  previewQuote = quote,
+  previewQuoteOriginal = quoteOriginal,
+  previewCloseMark = '',
+  previewCloseMarkOriginal = '',
   icon,
   photo,
   index,
@@ -82,10 +90,17 @@ const roleTags = role.split(' / ');
       )
     }
     <p class:list={['testimonial-quote', { 'line-clamp-4': isLong }]}>
-      <span class="quote-text" data-translated={quote} data-original={quoteOriginal}>
-        {quote}
+      <span class="quote-text" data-translated={previewQuote} data-original={previewQuoteOriginal}>
+        {previewQuote}
       </span>
     </p>
+    {
+      isLong && (
+        <span class="quote-close-mark" data-translated={previewCloseMark} data-original={previewCloseMarkOriginal}>
+          {previewCloseMark}
+        </span>
+      )
+    }
     {
       translated && (
         <span class="mt-1 flex flex-wrap items-center justify-between gap-x-2 gap-y-0.5 text-[0.75rem] text-white/25">

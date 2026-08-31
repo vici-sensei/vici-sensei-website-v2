@@ -11,12 +11,43 @@ const avatarFiles = import.meta.glob('../assets/avatars/*.{jpg,jpeg,png,webp}', 
 const QUOTE_LIMIT = 220;
 const MAX_DOTS = 7;
 
-const cards = testimonials.map((t, index) => ({
-  ...t,
-  index,
-  photo: t.photo ? (avatarFiles[`../assets/avatars/${t.photo}`] as { default: ImageMetadata } | undefined)?.default : undefined,
-  isLong: t.quote.length > QUOTE_LIMIT,
-}));
+// Quote marks live in code, not in src/data/testimonials.ts — quote/
+// quoteOriginal are plain, unwrapped text there. That's what lets a preview
+// that's been cut short from either end still get correctly-matched marks
+// instead of losing them (or keeping only one) to the cut.
+const QUOTE_MARKS = { open: '"', close: '"' };
+const QUOTE_MARKS_JA = { open: '「', close: '」' };
+
+// previewStart missing the opening gets a leading "..." before the reopened
+// quote mark. A preview clamped to 4 lines by CSS (isLong) can lose its
+// closing mark to the browser's own truncation ellipsis, so for those the
+// closing mark is left off here and rendered separately, outside the clamp
+// — see previewCloseMark/previewCloseMarkOriginal and TestimonialCard.astro.
+function buildPreviewQuote(
+  text: string,
+  start: number | undefined,
+  marks: { open: string; close: string },
+  isLong: boolean
+) {
+  const body = start ? `... ${text.slice(start).trimStart()}` : text;
+  return isLong ? `${marks.open}${body}` : `${marks.open}${body}${marks.close}`;
+}
+
+const cards = testimonials.map((t, index) => {
+  const isLong = t.quote.length > QUOTE_LIMIT;
+  return {
+    ...t,
+    index,
+    photo: t.photo ? (avatarFiles[`../assets/avatars/${t.photo}`] as { default: ImageMetadata } | undefined)?.default : undefined,
+    isLong,
+    previewQuote: buildPreviewQuote(t.quote, t.previewStart, QUOTE_MARKS, isLong),
+    previewQuoteOriginal: t.quoteOriginal
+      ? buildPreviewQuote(t.quoteOriginal, t.previewStartOriginal, QUOTE_MARKS_JA, isLong)
+      : undefined,
+    previewCloseMark: isLong ? QUOTE_MARKS.close : '',
+    previewCloseMarkOriginal: isLong && t.quoteOriginal ? QUOTE_MARKS_JA.close : '',
+  };
+});
 
 const TOTAL = cards.length;
 const longCards = cards.filter((c) => c.isLong);
@@ -82,7 +113,7 @@ const longCards = cards.filter((c) => c.isLong);
   </div>
 </section>
 
-<script define:vars={{ TOTAL, MAX_DOTS }}>
+<script define:vars={{ TOTAL, MAX_DOTS, QUOTE_MARKS, QUOTE_MARKS_JA }}>
   // ── Carousel ──────────────────────────────────────────────
   const track = document.getElementById('carouselTrack')
   const nextBtn = document.querySelector('.testimonial-carousel-btn.next')
@@ -537,14 +568,26 @@ const longCards = cards.filter((c) => c.isLong);
         if (quoteText) {
           quoteText.textContent = showOriginal ? quoteText.dataset.original : quoteText.dataset.translated
         }
+        // The card preview's closing quote mark is a separate element (see
+        // TestimonialCard.astro) so it survives CSS line-clamp truncation —
+        // keep it in sync with the language the toggle just switched to.
+        const closeMark = container.querySelector('.quote-close-mark')
+        if (closeMark) {
+          closeMark.textContent = showOriginal ? closeMark.dataset.original : closeMark.dataset.translated
+        }
         const quoteParagraphs = container.querySelector('.quote-paragraphs')
         if (quoteParagraphs) {
           const text = showOriginal ? quoteParagraphs.dataset.original : quoteParagraphs.dataset.translated
+          const marks = showOriginal ? QUOTE_MARKS_JA : QUOTE_MARKS
           quoteParagraphs.innerHTML = ''
-          text.split('\n\n').forEach((paragraph) => {
+          const paragraphs = text.split('\n\n')
+          paragraphs.forEach((paragraph, i) => {
             const p = document.createElement('p')
             p.className = 'testimonial-quote-para'
-            p.textContent = paragraph
+            let content = paragraph
+            if (i === 0) content = marks.open + content
+            if (i === paragraphs.length - 1) content += marks.close
+            p.textContent = content
             quoteParagraphs.appendChild(p)
           })
         }
@@ -571,13 +614,6 @@ const longCards = cards.filter((c) => c.isLong);
   }
 
   if (isMobileDevice()) {
-    document.querySelectorAll('.testimonial-card.has-more').forEach((card) => {
-      card.classList.add('cursor-pointer')
-      card.addEventListener('click', () => {
-        openReviewModal(Number(card.dataset.index), card)
-      })
-    })
-
     // Move "see original" / "See more" into one bottom row, styled as pill buttons.
     document.querySelectorAll('.testimonial-card').forEach((card) => {
       const actionsRow = card.querySelector('.testimonial-mobile-actions')
@@ -602,6 +638,20 @@ const longCards = cards.filter((c) => c.isLong);
         seeMoreBtn.classList.add('mobile-pill-btn', 'mobile-pill-btn-accent')
         actionsRow.appendChild(seeMoreBtn)
       }
+    })
+
+    // Same pill treatment for the "see original" button inside the full
+    // review modal — left in place (no actions row to move it into there).
+    document.querySelectorAll('.testimonial-modal .see-original-btn').forEach((btn) => {
+      btn.classList.remove(
+        'text-white/25',
+        'hover:text-white/30',
+        'hover:underline',
+        'p-0',
+        'bg-transparent',
+        'shrink-0'
+      )
+      btn.classList.add('mobile-pill-btn')
     })
   }
 

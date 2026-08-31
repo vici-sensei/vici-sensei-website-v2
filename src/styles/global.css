@@ -461,6 +461,13 @@
     @apply min-h-[60px] pl-3 text-[0.95rem] leading-[1.5] text-text-muted italic;
     border-left: 2px solid var(--color-border-soft);
   }
+  /* The card preview's closing quote mark for line-clamped (isLong) quotes —
+     a separate element so it isn't hidden by the browser's own clamp
+     ellipsis when it cuts the quote text off. */
+  .quote-close-mark {
+    @apply block pl-3 text-[0.95rem] leading-[1.5] text-text-muted italic;
+    border-left: 2px solid var(--color-border-soft);
+  }
   .testimonial-quote-para {
     margin-bottom: 0.6em;
   }
@@ -479,12 +486,12 @@
     border: 1px solid var(--color-border-soft);
   }
   .mobile-pill-btn-accent {
-    @apply text-accent-blue;
+    @apply min-h-[44px] px-5 py-2.5 text-[0.9rem] text-accent-blue;
     background: rgb(0 210 255 / 0.12);
     border-color: rgb(0 210 255 / 0.25);
   }
   .testimonial-carousel-btn {
-    @apply absolute top-1/2 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-border-soft text-white/75 backdrop-blur-[6px] max-[900px]:hidden;
+    @apply absolute top-1/2 z-10 flex h-11 w-11 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full border border-border-soft text-white/75 backdrop-blur-[6px] max-[900px]:hidden;
     background: rgb(11 15 25 / 0.85);
     transition: all 0.2s ease;
   }
@@ -518,9 +525,26 @@
     @apply hidden relative max-h-[80vh] w-full max-w-[520px] translate-y-2.5 flex-col gap-4 overflow-y-auto rounded-2xl border border-border-soft bg-bg-cards p-8;
     backdrop-filter: blur(10px);
     transition: transform 0.25s ease;
+    scrollbar-width: thin;
+    scrollbar-color: rgb(0 210 255 / 0.4) transparent;
   }
   .testimonial-modal.open {
     @apply flex translate-y-0 gap-0;
+  }
+  .testimonial-modal::-webkit-scrollbar {
+    width: 8px;
+  }
+  .testimonial-modal::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .testimonial-modal::-webkit-scrollbar-thumb {
+    background-color: rgb(0 210 255 / 0.4);
+    border-radius: 999px;
+    border: 2px solid transparent;
+    background-clip: padding-box;
+  }
+  .testimonial-modal::-webkit-scrollbar-thumb:hover {
+    background-color: rgb(0 210 255 / 0.65);
   }
   .testimonial-modal-close {
     @apply absolute top-4 right-4 flex h-8 w-8 items-center justify-center rounded-full text-text-muted;
@@ -809,7 +833,10 @@
     transition: border-color 0.3s ease;
   }
   .cookie-widget.expanded {
-    @apply bottom-6 max-xl:bottom-26 max-md:bottom-20;
+    @apply bottom-6;
+  }
+  .floating-cta-bar.reveal ~ .cookie-widget.expanded {
+    @apply max-xl:bottom-26 max-md:bottom-20;
   }
   .cookie-widget.expanded .cookie-trigger {
     border-color: rgb(255 74 90 / 0.35);

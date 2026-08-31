@@ -32,6 +32,18 @@ const {
   photo,
   index,
 } = Astro.props;
+
+// quote/quoteOriginal are plain, unwrapped text (see src/data/testimonials.ts)
+// — wrap the first/last paragraph with quote marks here instead, so the
+// marks always match the paragraph split. The client-side "see original"
+// toggle (in Testimonials.astro) re-applies this same wrapping in Japanese.
+const QUOTE_MARKS = { open: '"', close: '"' };
+const quoteParagraphs = quote.split('\n\n').map((paragraph, i, all) => {
+  let text = paragraph;
+  if (i === 0) text = QUOTE_MARKS.open + text;
+  if (i === all.length - 1) text += QUOTE_MARKS.close;
+  return text;
+});
 ---
 
 <div
@@ -76,7 +88,7 @@ const {
           <span class="translated-label">(Translated from Japanese)</span>
           <button
             type="button"
-            class="see-original-btn shrink-0 cursor-pointer bg-transparent p-0 font-bold text-white/25 hover:text-white/30 hover:underline"
+            class="see-original-btn mb-2 shrink-0 cursor-pointer bg-transparent p-0 font-bold text-white/25 hover:text-white/30 hover:underline"
             data-state="translated"
           >
             see original
@@ -98,7 +110,7 @@ const {
       data-translated={quote}
       data-original={quoteOriginal}
     >
-      {quote.split('\n\n').map((paragraph) => <p class="testimonial-quote-para">{paragraph}</p>)}
+      {quoteParagraphs.map((paragraph) => <p class="testimonial-quote-para">{paragraph}</p>)}
     </div>
   </div>
 </div>

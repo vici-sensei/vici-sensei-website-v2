@@ -19,6 +19,45 @@ import { roadmapItems } from '../data/roadmap';
 </section>
 
 <script>
+  const timelineLine = document.querySelector<HTMLElement>('.timeline-line');
+  const roadmapCards = document.querySelectorAll<HTMLElement>('.roadmap-card');
+
+  function syncTimelineGradient() {
+    if (!timelineLine) return;
+    const lineRect = timelineLine.getBoundingClientRect();
+    if (!lineRect.height) return;
+
+    const stops: { pct: number; accent: string }[] = [];
+    roadmapCards.forEach((card) => {
+      const icon = card.querySelector('.card-icon');
+      if (!icon) return;
+      const accent = getComputedStyle(card).getPropertyValue('--accent-glow').trim();
+      const iconRect = icon.getBoundingClientRect();
+      const center = iconRect.top + iconRect.height / 2 - lineRect.top;
+      const pct = Math.min(100, Math.max(0, (center / lineRect.height) * 100));
+      stops.push({ pct, accent });
+    });
+    if (!stops.length) return;
+
+    stops.sort((a, b) => a.pct - b.pct);
+    timelineLine.style.background = `linear-gradient(to bottom, ${stops
+      .map((s) => `${s.accent} ${s.pct.toFixed(2)}%`)
+      .join(', ')})`;
+  }
+
+  let rafId: number | null = null;
+  function animateSync(duration = 400) {
+    const start = performance.now();
+    function step(now: number) {
+      syncTimelineGradient();
+      if (now - start < duration) {
+        rafId = requestAnimationFrame(step);
+      }
+    }
+    if (rafId) cancelAnimationFrame(rafId);
+    rafId = requestAnimationFrame(step);
+  }
+
   const cards = document.querySelectorAll('.roadmap-card:not(.pinned-open)');
   cards.forEach((card) => {
     const trigger = card.querySelector('.pill-trigger');
@@ -33,6 +72,11 @@ import { roadmapItems } from '../data/roadmap';
         card.classList.add('open');
         trigger.setAttribute('aria-expanded', 'true');
       }
+      animateSync();
     });
   });
+
+  window.addEventListener('resize', () => syncTimelineGradient());
+  window.addEventListener('load', () => syncTimelineGradient());
+  syncTimelineGradient();
 </script>

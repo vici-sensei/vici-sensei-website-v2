@@ -12,7 +12,7 @@ export const faqItems: FaqEntry[] = [
   {
     question: "What's the difference between the Async, Full-Access, and VIP plans?",
     answer:
-      "All three share the same personalized roadmap and unlimited access to the kanji and vocab app. Async is fully self-paced — no live calls, just a weekly written pack I personally correct. Full-Access adds four live 1-hour sessions per cycle in a small group of 3, where I split the hour individually between each of you in separate private channels. VIP gives you those same four live sessions, but 100% private — the whole hour is yours alone, every week.",
+      "All three share the same personalized roadmap and unlimited access to the kanji and vocab app. Async is fully self-paced — no live calls, just a weekly written pack, corrected through personal voice message feedback. Full-Access adds four live 1-hour sessions per cycle in a small group of 3, where I split the hour individually between each of you in separate private channels. VIP gives you those same four live sessions, but 100% private — the whole hour is yours alone, every week.",
   },
   {
     question: 'How is the payment managed?',
@@ -33,6 +33,11 @@ export const faqItems: FaqEntry[] = [
     question: 'Can I switch between plans?',
     answer:
       "Yes. Just message me and I'll switch you over starting from your next 4-week billing cycle — your current cycle isn't restarted or extended.",
+  },
+  {
+    question: 'Can I cancel anytime?',
+    answer:
+      "Yes, anytime — just message me and I'll cancel your subscription before the next 4-week renewal. You keep full access until the end of your current paid cycle, and you won't be charged again after that.",
   },
   {
     question: 'Is the free 15-minute call really free?',

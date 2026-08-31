@@ -27,6 +27,8 @@
     let closestDistance = Infinity;
 
     elementsToGlow.forEach((element) => {
+      // On desktop, pillar cards only glow on hover, never from scroll position.
+      if (supportsHover && element.classList.contains('method-card')) return;
       const rect = element.getBoundingClientRect();
       const elementCenter = rect.top + rect.height / 2;
       const distanceFromCenter = Math.abs(elementCenter - screenCenter);

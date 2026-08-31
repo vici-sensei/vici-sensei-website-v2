@@ -89,7 +89,7 @@ export const roadmapItems: RoadmapItem[] = [
     accent: '#ffd200',
     title: 'Rejecting Academia',
     description:
-      '<span class="highlight">Being offered a prestigious position</span> to become a university teacher of the Japanese language, <span class="highlight">I gracefully turned it down</span>. I chose to focus entirely on my current students and my path as an independent teacher.',
+      '<span class="highlight">Being offered a prestigious position</span> to become a university teacher of the Japanese language, <span class="highlight">I respectfully declined</span>. I chose to focus entirely on my current students and my path as an independent teacher.',
   },
   {
     badge: '2025',

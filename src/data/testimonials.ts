@@ -96,7 +96,7 @@ export const testimonials: TestimonialItem[] = [
   // Andrei
 
   {
-    photo: "Andrei.png",
+    photo: "Andrei.webp",
     icon: "fa6-solid:user-ninja",
     name: "Andrei",
     flag: "flagpack:ro",
@@ -128,7 +128,7 @@ export const testimonials: TestimonialItem[] = [
 
   // Sheldon
   {
-    photo: "Sheldon.jpeg",
+    photo: "Sheldon.webp",
     icon: "game-icons:paper-lantern",
     name: "Sheldon",
     flag: "flagpack:us",
@@ -139,7 +139,7 @@ export const testimonials: TestimonialItem[] = [
 
   // Faru
   {
-    photo: "Faru.jpeg",
+    photo: "Faru.webp",
     icon: "game-icons:fuji",
     name: "Hirokazu",
     flag: "flagpack:jp",

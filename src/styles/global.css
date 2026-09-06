@@ -416,6 +416,18 @@
     border: 1px solid rgb(255 34 0 / 0.2);
   }
 
+  /* JOURNEY CLOSING */
+  .journey-photo {
+    @apply rounded-2xl border object-cover;
+    width: min(100%, 640px);
+    height: auto;
+    border-color: rgb(255 255 255 / 0.1);
+    box-shadow: 0 20px 45px -20px rgb(0 0 0 / 0.6), 0 0 25px rgb(255 106 0 / 0.15);
+  }
+  .journey-lead {
+    @apply mb-3 text-xl font-extrabold text-white max-md:text-lg;
+  }
+
   /* TESTIMONIALS */
   .testimonial-card {
     @apply relative flex shrink-0 grow-0 basis-[calc(50%-15px)] flex-col gap-4 rounded-2xl border border-border-soft bg-bg-cards p-6 max-[900px]:basis-full;

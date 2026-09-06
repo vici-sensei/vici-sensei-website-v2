@@ -1,0 +1,24 @@
+---
+import { Image } from 'astro:assets';
+import photo from '../assets/story/vincent-and-monk.webp';
+---
+
+<section class="section-padding bg-[#090d16]">
+  <div class="container-narrow flex flex-col items-center gap-8 text-center">
+    <Image
+      src={photo}
+      alt="Vincent and a Zen Buddhist monk bowing together in a Kyoto temple garden"
+      width={900}
+      height={592}
+      class="journey-photo"
+    />
+    <div>
+      <p class="journey-lead">Thank you for reading this far!</p>
+      <p class="subtitle">
+        During my 16 years of learning, practicing, and growing — both as a person and as a
+        teacher — I've met incredible people along the way. Here is what some of them have to
+        say.
+      </p>
+    </div>
+  </div>
+</section>

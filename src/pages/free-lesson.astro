@@ -46,6 +46,8 @@ import { Icon } from 'astro-icon/components';
           <span>I agree to be contacted on WhatsApp about this offer. See <a href="/privacy-policy">Privacy Policy</a>.</span>
         </label>
 
+        <p id="freeLessonError" class="lesson-form-hint mb-3 text-center text-accent-red" hidden>Something went wrong — please try again.</p>
+
         <button type="submit" id="freeLessonSubmit" class="btn-primary w-full text-center">Claim My Free Lesson</button>
       </form>
 
@@ -63,36 +65,55 @@ import { Icon } from 'astro-icon/components';
   const form = document.querySelector<HTMLFormElement>('#freeLessonForm');
   const submitButton = document.querySelector<HTMLButtonElement>('#freeLessonSubmit');
   const successMessage = document.querySelector<HTMLElement>('#lessonSuccessMessage');
+  const errorMessage = document.querySelector<HTMLElement>('#freeLessonError');
+  const nameInput = document.querySelector<HTMLInputElement>('#name');
+  const whatsappInput = document.querySelector<HTMLInputElement>('#whatsapp');
+  const consentInput = document.querySelector<HTMLInputElement>('input[name="consent"]');
+
+  const SUPABASE_URL = import.meta.env.PUBLIC_SUPABASE_URL;
+  const SUPABASE_ANON_KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
 
   form?.addEventListener('submit', async (event) => {
     event.preventDefault();
+    if (!nameInput || !whatsappInput || !consentInput) return;
 
+    if (errorMessage) errorMessage.hidden = true;
     if (submitButton) {
       submitButton.disabled = true;
       submitButton.textContent = 'Sending...';
     }
 
-    const params = new URLSearchParams();
-    new FormData(form).forEach((value, key) => params.append(key, value.toString()));
-
     try {
-      await fetch(form.action, {
+      const response = await fetch(`${SUPABASE_URL}/rest/v1/free_lesson_leads`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: params.toString(),
+        headers: {
+          'Content-Type': 'application/json',
+          apikey: SUPABASE_ANON_KEY,
+          Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
+          Prefer: 'return=minimal',
+        },
+        body: JSON.stringify({
+          name: nameInput.value,
+          whatsapp: whatsappInput.value,
+          consent: consentInput.checked,
+        }),
       });
+
+      if (!response.ok) throw new Error(`Supabase insert failed: ${response.status}`);
+
+      form.hidden = true;
+      if (successMessage) successMessage.hidden = false;
+
+      setTimeout(() => {
+        window.location.href = '/';
+      }, 8000);
     } catch {
-      // Netlify's form-processing intercepts the request at the edge before
-      // it reaches any origin server, so the submission is still captured
-      // even if this fetch call itself reports a network error client-side.
+      if (errorMessage) errorMessage.hidden = false;
+      if (submitButton) {
+        submitButton.disabled = false;
+        submitButton.textContent = 'Claim My Free Lesson';
+      }
     }
-
-    form.hidden = true;
-    if (successMessage) successMessage.hidden = false;
-
-    setTimeout(() => {
-      window.location.href = '/';
-    }, 8000);
   });
 </script>
 

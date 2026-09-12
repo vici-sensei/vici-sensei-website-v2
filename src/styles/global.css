@@ -804,6 +804,59 @@
     @apply text-white m-0;
   }
 
+  /* FREE LESSON FORM */
+  .lesson-form-card {
+    @apply relative bg-bg-cards border border-border-soft rounded-2xl;
+    padding: 40px;
+    backdrop-filter: blur(10px);
+  }
+  @media (max-width: 480px) {
+    .lesson-form-card {
+      padding: 28px 22px;
+    }
+  }
+  .lesson-form-group {
+    @apply flex flex-col gap-2 mb-6;
+  }
+  .lesson-form-label {
+    @apply text-white font-bold text-[0.95rem];
+  }
+  .lesson-form-hint {
+    @apply text-text-muted text-[0.85rem] leading-[1.5];
+  }
+  .lesson-form-input {
+    @apply w-full rounded-xl border text-white text-[1rem];
+    padding: 14px 16px;
+    background: rgb(255 255 255 / 0.03);
+    border-color: var(--color-border-soft);
+    font-family: inherit;
+    transition: border-color 0.2s ease, background 0.2s ease;
+  }
+  .lesson-form-input::placeholder {
+    color: var(--color-text-muted);
+  }
+  .lesson-form-input:focus {
+    outline: none;
+    border-color: var(--color-accent-red);
+    background: rgb(255 255 255 / 0.05);
+  }
+  .lesson-form-consent {
+    @apply flex items-start gap-3 mb-8 text-[0.85rem] text-text-muted leading-[1.5] cursor-pointer;
+  }
+  .lesson-form-consent input[type='checkbox'] {
+    @apply mt-0.5 h-[18px] w-[18px] shrink-0 cursor-pointer rounded border;
+    accent-color: var(--color-accent-red);
+    border-color: var(--color-border-soft);
+  }
+  .lesson-form-consent a {
+    @apply text-white font-semibold underline;
+    text-underline-offset: 2px;
+    transition: color 0.2s ease;
+  }
+  .lesson-form-consent a:hover {
+    color: var(--color-accent-red);
+  }
+
   /* FLOATING CTA */
   .floating-cta-bar {
     @apply fixed left-1/2 flex items-center justify-between rounded-full px-6 py-3 max-md:px-0 max-md:py-0;

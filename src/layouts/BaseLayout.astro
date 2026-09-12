@@ -8,12 +8,14 @@ export interface Props {
   title?: string;
   description?: string;
   image?: string;
+  noindex?: boolean;
 }
 
 const {
   title = 'Vici Sensei — Japanese Language Mentorship For The Logic-Driven',
   description = 'Structure-first Japanese live classes for logical minds. Carefully designed learning environment including live sessions, JLPT-focused practice, and a spaced-repetition vocab app.',
   image = '/images/og-image.png',
+  noindex = false,
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
@@ -28,6 +30,7 @@ const ogImageURL = new URL(image, Astro.site);
   <meta name="google" content="notranslate" />
   <title>{title}</title>
   <meta name="description" content={description} />
+  {noindex && <meta name="robots" content="noindex, nofollow" />}
   <link rel="canonical" href={canonicalURL} />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="icon" href="/favicon.ico" sizes="any" />

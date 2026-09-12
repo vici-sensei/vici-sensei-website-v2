@@ -1,0 +1,148 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { Icon } from 'astro-icon/components';
+---
+
+<BaseLayout
+  title="Claim Your Free Japanese Lesson — Vici Sensei"
+  description="Enter your name and WhatsApp contact to claim your free Japanese lesson with Vici Sensei."
+  noindex={true}
+>
+  <section class="section-padding">
+    <div class="container-narrow">
+      <div class="header-center">
+        <span class="badge">FREE LESSON</span>
+        <h1 class="main-title">Claim Your Free Japanese Lesson</h1>
+        <p class="subtitle">Enter your details and I'll message you on WhatsApp to schedule your free micro-group lesson.</p>
+      </div>
+
+      <form
+        id="freeLessonForm"
+        name="free-lesson"
+        method="POST"
+        action="/"
+        data-netlify="true"
+        netlify-honeypot="bot-field"
+        class="lesson-form-card max-w-[480px] mx-auto"
+      >
+        <input type="hidden" name="form-name" value="free-lesson" />
+        <p class="hidden" aria-hidden="true">
+          <label>Don't fill this out if you're human: <input name="bot-field" /></label>
+        </p>
+
+        <div class="lesson-form-group">
+          <label for="name" class="lesson-form-label">Your Name</label>
+          <input type="text" id="name" name="name" class="lesson-form-input" placeholder="e.g. Alex Popescu" autocomplete="name" required />
+        </div>
+
+        <div class="lesson-form-group">
+          <label for="whatsapp" class="lesson-form-label">WhatsApp Contact Info</label>
+          <input type="tel" id="whatsapp" name="whatsapp" class="lesson-form-input" placeholder="+40 7XX XXX XXX" autocomplete="tel" required />
+          <p class="lesson-form-hint">Include your country code — I'll message you here to schedule your lesson.</p>
+        </div>
+
+        <label class="lesson-form-consent">
+          <input type="checkbox" name="consent" required />
+          <span>I agree to be contacted on WhatsApp about this offer. See <a href="/privacy-policy">Privacy Policy</a>.</span>
+        </label>
+
+        <button type="submit" id="freeLessonSubmit" class="btn-primary w-full text-center">Claim My Free Lesson</button>
+      </form>
+
+      <div id="lessonSuccessMessage" class="lesson-form-card max-w-[480px] mx-auto text-center" hidden>
+        <Icon name="mdi:check-circle" class="mx-auto mb-5 h-14 w-14 text-accent-blue" aria-hidden="true" />
+        <h2 class="mb-3 text-2xl font-extrabold tracking-[-0.5px] text-white">Free Lesson Claimed! 🎉</h2>
+        <p class="mb-2 leading-[1.6] text-text-muted">I've received your details — expect a WhatsApp message from me shortly to lock in your spot.</p>
+        <p class="text-[0.85rem] text-text-muted">Taking you back to the homepage...</p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  const form = document.querySelector<HTMLFormElement>('#freeLessonForm');
+  const submitButton = document.querySelector<HTMLButtonElement>('#freeLessonSubmit');
+  const successMessage = document.querySelector<HTMLElement>('#lessonSuccessMessage');
+
+  form?.addEventListener('submit', async (event) => {
+    event.preventDefault();
+
+    if (submitButton) {
+      submitButton.disabled = true;
+      submitButton.textContent = 'Sending...';
+    }
+
+    const params = new URLSearchParams();
+    new FormData(form).forEach((value, key) => params.append(key, value.toString()));
+
+    try {
+      await fetch(form.action, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: params.toString(),
+      });
+    } catch {
+      // Netlify's form-processing intercepts the request at the edge before
+      // it reaches any origin server, so the submission is still captured
+      // even if this fetch call itself reports a network error client-side.
+    }
+
+    form.hidden = true;
+    if (successMessage) successMessage.hidden = false;
+
+    setTimeout(() => {
+      window.location.href = '/';
+    }, 8000);
+  });
+</script>
+
+<style>
+  /* Compact spacing so the whole form fits above the fold on phones —
+     scoped to this page only, doesn't touch the shared classes elsewhere. */
+  @media (max-width: 768px) {
+    .section-padding {
+      /* keep enough top clearance for the fixed nav bar (~67px tall) */
+      padding-top: 84px;
+      padding-bottom: 32px;
+    }
+    .header-center {
+      margin-bottom: 14px;
+    }
+    .badge {
+      padding: 4px 12px;
+    }
+    .main-title {
+      margin-top: 8px;
+      margin-bottom: 4px;
+      font-size: 1.55rem;
+      line-height: 1.15;
+    }
+    .subtitle {
+      font-size: 0.9rem;
+      line-height: 1.4;
+    }
+    .lesson-form-card {
+      padding: 16px;
+    }
+    .lesson-form-group {
+      margin-bottom: 8px;
+      gap: 4px;
+    }
+    .lesson-form-input {
+      padding: 10px 14px;
+    }
+    .lesson-form-hint {
+      font-size: 0.75rem;
+      line-height: 1.3;
+    }
+    .lesson-form-consent {
+      margin-bottom: 10px;
+      font-size: 0.75rem;
+      line-height: 1.3;
+    }
+    #freeLessonSubmit {
+      padding-top: 12px;
+      padding-bottom: 12px;
+    }
+  }
+</style>

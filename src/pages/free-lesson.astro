@@ -73,6 +73,30 @@ import { Icon } from 'astro-icon/components';
   const SUPABASE_URL = import.meta.env.PUBLIC_SUPABASE_URL;
   const SUPABASE_ANON_KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
 
+  const DRAFT_KEY = 'freeLessonFormDraft';
+
+  try {
+    const saved = JSON.parse(localStorage.getItem(DRAFT_KEY) || '{}');
+    if (nameInput && typeof saved.name === 'string') nameInput.value = saved.name;
+    if (whatsappInput && typeof saved.whatsapp === 'string') whatsappInput.value = saved.whatsapp;
+  } catch {
+    // ignore malformed/unavailable storage
+  }
+
+  const saveDraft = () => {
+    try {
+      localStorage.setItem(
+        DRAFT_KEY,
+        JSON.stringify({ name: nameInput?.value ?? '', whatsapp: whatsappInput?.value ?? '' })
+      );
+    } catch {
+      // ignore unavailable storage (e.g. private browsing)
+    }
+  };
+
+  nameInput?.addEventListener('input', saveDraft);
+  whatsappInput?.addEventListener('input', saveDraft);
+
   form?.addEventListener('submit', async (event) => {
     event.preventDefault();
     if (!nameInput || !whatsappInput || !consentInput) return;
@@ -100,6 +124,12 @@ import { Icon } from 'astro-icon/components';
       });
 
       if (!response.ok) throw new Error(`Supabase insert failed: ${response.status}`);
+
+      try {
+        localStorage.removeItem(DRAFT_KEY);
+      } catch {
+        // ignore unavailable storage
+      }
 
       form.hidden = true;
       if (successMessage) successMessage.hidden = false;

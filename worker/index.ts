@@ -45,11 +45,9 @@ const PRICES: Record<'RO' | 'EU' | 'US', {
   },
 };
 
-export const onRequest = async ({ request, next }: Context): Promise<Response> => {
-  const response = await next();
-
-  const { pathname } = new URL(request.url);
-  if (pathname !== '/' && pathname !== '/index.html') return response;
+const handleHomepage = async (request: Request & { cf?: { country?: string } }, env: Env) => {
+  const response = await env.ASSETS.fetch(request);
+  if (!response.ok) return response;
 
   const country = request.cf?.country;
 
@@ -66,7 +64,7 @@ export const onRequest = async ({ request, next }: Context): Promise<Response> =
     },
   });
 
-  return new HTMLRewriter()
+  const rewritten = new HTMLRewriter()
     .on('#price-async, #price-async-tab', setText(prices.async))
     .on('#price-async-week', setText(prices.asyncWeek))
     .on('#price-standard, #price-standard-tab', setText(prices.standard))
@@ -74,4 +72,17 @@ export const onRequest = async ({ request, next }: Context): Promise<Response> =
     .on('#price-vip, #price-vip-tab', setText(prices.vip))
     .on('#price-vip-week', setText(prices.vipWeek))
     .transform(response);
+
+  // The HTML now depends on the visitor's country, so it must not be
+  // revalidated against the static asset's ETag or shared between countries.
+  const headers = new Headers(rewritten.headers);
+  headers.delete('etag');
+  headers.set('cache-control', 'private, no-cache');
+  return new Response(rewritten.body, { status: rewritten.status, headers });
+};
+
+export default {
+  fetch(request: Request, env: Env): Promise<Response> {
+    return handleHomepage(request, env);
+  },
 };

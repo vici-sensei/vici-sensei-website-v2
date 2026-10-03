@@ -1,5 +1,13 @@
-import type { Context } from '@netlify/edge-functions';
-import { HTMLRewriter } from 'https://ghuc.cc/worker-tools/html-rewriter/index.ts';
+// Cloudflare Pages Functions middleware: swaps the homepage prices for the
+// visitor's country (RO / eurozone / rest of the world). HTMLRewriter is a
+// Cloudflare runtime global, so it needs no import.
+
+declare const HTMLRewriter: any;
+
+type Context = {
+  request: Request & { cf?: { country?: string } };
+  next: () => Promise<Response>;
+};
 
 const EUROZONE_COUNTRIES = new Set([
   'AT', 'BE', 'HR', 'CY', 'EE', 'FI', 'FR', 'DE', 'GR',
@@ -37,9 +45,13 @@ const PRICES: Record<'RO' | 'EU' | 'US', {
   },
 };
 
-export default async (request: Request, context: Context) => {
-  const response = await context.next();
-  const country = context.geo?.country?.code;
+export const onRequest = async ({ request, next }: Context): Promise<Response> => {
+  const response = await next();
+
+  const { pathname } = new URL(request.url);
+  if (pathname !== '/' && pathname !== '/index.html') return response;
+
+  const country = request.cf?.country;
 
   let prices = PRICES.US;
   if (country === 'RO') {
@@ -48,38 +60,18 @@ export default async (request: Request, context: Context) => {
     prices = PRICES.EU;
   }
 
+  const setText = (text: string) => ({
+    element(el: { setInnerContent: (content: string) => void }) {
+      el.setInnerContent(text);
+    },
+  });
+
   return new HTMLRewriter()
-    .on('#price-async, #price-async-tab', {
-      element(el) {
-        el.setInnerContent(prices.async);
-      },
-    })
-    .on('#price-async-week', {
-      element(el) {
-        el.setInnerContent(prices.asyncWeek);
-      },
-    })
-    .on('#price-standard, #price-standard-tab', {
-      element(el) {
-        el.setInnerContent(prices.standard);
-      },
-    })
-    .on('#price-standard-week', {
-      element(el) {
-        el.setInnerContent(prices.standardWeek);
-      },
-    })
-    .on('#price-vip, #price-vip-tab', {
-      element(el) {
-        el.setInnerContent(prices.vip);
-      },
-    })
-    .on('#price-vip-week', {
-      element(el) {
-        el.setInnerContent(prices.vipWeek);
-      },
-    })
+    .on('#price-async, #price-async-tab', setText(prices.async))
+    .on('#price-async-week', setText(prices.asyncWeek))
+    .on('#price-standard, #price-standard-tab', setText(prices.standard))
+    .on('#price-standard-week', setText(prices.standardWeek))
+    .on('#price-vip, #price-vip-tab', setText(prices.vip))
+    .on('#price-vip-week', setText(prices.vipWeek))
     .transform(response);
 };
-
-export const config = { path: '/' };

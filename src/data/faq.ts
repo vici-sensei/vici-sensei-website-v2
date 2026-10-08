@@ -10,9 +10,9 @@ export const faqItems: FaqEntry[] = [
       "Yes, absolutely. In fact, starting as a beginner here is an advantage because you won't have to break old habits and relearn the right way. I will guide you cleanly from zero straight into the structured system I've spent years to build.",
   },
   {
-    question: "What's the difference between the Async, Full-Access, and VIP plans?",
+    question: "What's the difference between the Assisted Async and Guided Live plans?",
     answer:
-      "All three share the same personalized roadmap and unlimited access to the kanji and vocab app. Async is fully self-paced — no live calls, just a weekly written pack, corrected through personal voice message feedback. Full-Access adds four live 1-hour sessions per cycle in a small group of 3, where I split the hour individually between each of you in separate private channels. VIP gives you those same four live sessions, but 100% private — the whole hour is yours alone, every week.",
+      "Both share the same personalized roadmap and unlimited access to the kanji and vocab app. Assisted Async is fully self-paced — no live calls, just a weekly written pack, corrected through personal voice message feedback. Guided Live adds four live 1-hour sessions per cycle in a small group of 3, where I split the hour individually between each of you in separate private channels.",
   },
   {
     question: 'How is the payment managed?',
@@ -22,12 +22,12 @@ export const faqItems: FaqEntry[] = [
   {
     question: 'What happens if I can’t attend a scheduled live session?',
     answer:
-      "This applies to the Full-Access and VIP plans, since Async has no fixed live calls. In Full-Access, because the small-group time is shared, a missed session can be rescheduled if all group members unanimously agree, or I'll try to fit you into another active group that week — and if neither works out, you'll still get the full materials and tasks from that session, so you never fall behind. In VIP, since your hour is fully private, I'll simply reschedule it directly with you, subject to availability.",
+      "This applies to the Guided Live plan, since Assisted Async has no fixed live calls. Because the small-group time is shared, a missed session can be rescheduled if all group members unanimously agree, or I'll try to fit you into another active group that week — and if neither works out, you'll still get the full materials and tasks from that session, so you never fall behind.",
   },
   {
     question: 'Do I get a certificate?',
     answer:
-      "Full-Access and VIP students can request a Certificate of Achievement reflecting their study duration and a JLPT-equivalent level. It's my own personal assessment based on the work we've done together — not an official JLPT certificate — but it's a solid way to document your progress. The Async plan doesn't include this certificate.",
+      "Yes, on both plans you can request a Certificate of Achievement reflecting your study duration and a JLPT-equivalent level. On Assisted Async, I'll first confirm your level with a short check, since we don't meet live every week. It's my own personal assessment based on the work we've done together — not an official JLPT certificate — but it's a solid way to document your progress.",
   },
   {
     question: 'Can I switch between plans?',

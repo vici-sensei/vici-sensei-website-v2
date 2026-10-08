@@ -191,6 +191,14 @@
     background: rgb(255 255 255 / 0.07);
     border-color: rgb(255 255 255 / 0.2);
   }
+  .btn-primary.blue {
+    color: var(--color-bg-main);
+    background: var(--color-accent-blue);
+    box-shadow: 0 0 30px rgb(0 210 255 / 0.35);
+  }
+  .btn-primary.blue:hover {
+    box-shadow: 0 0 40px rgb(0 210 255 / 0.55);
+  }
   /* 480px overrides must come after the base rules above so they win the cascade. */
   @media (max-width: 480px) {
     .hero-cta-group {
@@ -587,6 +595,11 @@
     border-color: var(--color-accent-red);
     background: rgb(255 74 90 / 0.1);
     box-shadow: 0 8px 20px rgb(255 74 90 / 0.25);
+  }
+  .plan-switcher-btn[data-plan="async"][aria-selected="true"] {
+    border-color: var(--color-accent-blue);
+    background: rgb(0 210 255 / 0.1);
+    box-shadow: 0 8px 20px rgb(0 210 255 / 0.25);
   }
   .plan-switcher-price {
     @apply text-[0.85rem] font-bold;

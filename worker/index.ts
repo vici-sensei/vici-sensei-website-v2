@@ -1,5 +1,5 @@
 // Cloudflare Pages Functions middleware: swaps the homepage prices for the
-// visitor's country (RO / eurozone / rest of the world). HTMLRewriter is a
+// visitor's country (RO / eurozone / UK / rest of the world). HTMLRewriter is a
 // Cloudflare runtime global, so it needs no import.
 
 declare const HTMLRewriter: any;
@@ -14,34 +14,36 @@ const EUROZONE_COUNTRIES = new Set([
   'IE', 'IT', 'LV', 'LT', 'LU', 'MT', 'NL', 'PT', 'SK', 'SI', 'ES',
 ]);
 
-const PRICES: Record<'RO' | 'EU' | 'US', {
+// The UK plus the Crown Dependencies, which all use the pound sterling.
+const GBP_COUNTRIES = new Set(['GB', 'GG', 'IM', 'JE']);
+
+const PRICES: Record<'RO' | 'EU' | 'GB' | 'US', {
   async: string; asyncWeek: string;
   standard: string; standardWeek: string;
-  vip: string; vipWeek: string;
 }> = {
   RO: {
-    async: '199 RON',
-    asyncWeek: 'Equivalent to 49.75 RON/week',
+    async: '250 RON',
+    asyncWeek: 'Equivalent to 62.50 RON/week',
     standard: '499 RON',
     standardWeek: 'Equivalent to 124.75 RON/week',
-    vip: '1399 RON',
-    vipWeek: 'Equivalent to 349.75 RON/week',
   },
   EU: {
-    async: '€49',
-    asyncWeek: 'Equivalent to €12.25/week',
+    async: '€65',
+    asyncWeek: 'Equivalent to €16.25/week',
     standard: '€129',
     standardWeek: 'Equivalent to €32.25/week',
-    vip: '€349',
-    vipWeek: 'Equivalent to €87.25/week',
+  },
+  GB: {
+    async: '£65',
+    asyncWeek: 'Equivalent to £16.25/week',
+    standard: '£129',
+    standardWeek: 'Equivalent to £32.25/week',
   },
   US: {
-    async: '$49',
-    asyncWeek: 'Equivalent to $12.25/week',
+    async: '$65',
+    asyncWeek: 'Equivalent to $16.25/week',
     standard: '$129',
     standardWeek: 'Equivalent to $32.25/week',
-    vip: '$349',
-    vipWeek: 'Equivalent to $87.25/week',
   },
 };
 
@@ -56,6 +58,8 @@ const handleHomepage = async (request: Request & { cf?: { country?: string } }, 
     prices = PRICES.RO;
   } else if (country && EUROZONE_COUNTRIES.has(country)) {
     prices = PRICES.EU;
+  } else if (country && GBP_COUNTRIES.has(country)) {
+    prices = PRICES.GB;
   }
 
   const setText = (text: string) => ({
@@ -69,8 +73,6 @@ const handleHomepage = async (request: Request & { cf?: { country?: string } }, 
     .on('#price-async-week', setText(prices.asyncWeek))
     .on('#price-standard, #price-standard-tab', setText(prices.standard))
     .on('#price-standard-week', setText(prices.standardWeek))
-    .on('#price-vip, #price-vip-tab', setText(prices.vip))
-    .on('#price-vip-week', setText(prices.vipWeek))
     .transform(response);
 
   // The HTML now depends on the visitor's country, so it must not be

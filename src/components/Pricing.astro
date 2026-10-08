@@ -7,67 +7,63 @@
     <span class="badge text-[0.75rem] uppercase">START YOUR JOURNEY</span>
 
     <!-- Clear Section Marker -->
-    <h2 class="main-title text-white text-[2.5rem] mt-[15px] mb-0 tracking-[-0.5px]">Transparent Pricing</h2>
+    <h2 class="main-title text-white text-[2.5rem] mt-[15px] mb-0 tracking-[-0.5px]">Choose Your Study Style</h2>
 
     <!-- Supporting Value Statement -->
-    <p class="subtitle mt-[15px] mb-0">Passion got you this far — now let's add the structure. Get everything you need to master Japanese, built into one seamless, high-touch mentorship program.</p>
+    <p class="subtitle mt-[15px] mb-0 max-w-[760px]"><span class="block">Do you learn best with someone guiding you in real time, or on your own schedule?</span>Pick your style. The system and roadmap stay the same.</p>
   </div>
 
-  <!-- Switcher: Async Mentorship / 1-on-3 Mentorship (existing) / 1-on-1 VIP -->
+  <!-- Switcher: Guided Live / Assisted Async -->
   <div class="site-container max-w-[820px] mx-auto">
 
-    <div class="plan-switcher relative" role="tablist" aria-label="Pricing plans">
-      <span class="absolute -top-3 left-1/2 -translate-x-1/2 z-10 bg-accent-red text-white text-[0.62rem] font-bold uppercase tracking-[0.5px] px-2.5 py-1 rounded-full shadow-[0_0_0_3px_#0b0f19,0_2px_10px_rgba(255,74,90,0.45)] whitespace-nowrap">Most Popular</span>
-      <button type="button" class="plan-switcher-btn flex flex-col items-center gap-0.5 max-md:text-[0.85rem] max-md:px-1.5" data-plan="async" role="tab" aria-selected="false">
-        <span>Async</span>
-        <span id="price-async-tab" class="plan-switcher-price">$49</span>
-      </button>
+    <div class="plan-switcher" role="tablist" aria-label="Pricing plans">
       <button type="button" class="plan-switcher-btn flex flex-col items-center gap-0.5 max-md:text-[0.85rem] max-md:px-1.5" data-plan="standard" role="tab" aria-selected="true">
-        <span>Full-Access</span>
-        <span id="price-standard-tab" class="plan-switcher-price">$129</span>
+        <span class="absolute -top-3 left-1/2 -translate-x-1/2 z-10 bg-accent-red text-white text-[0.62rem] font-bold uppercase tracking-[0.5px] px-2.5 py-1 rounded-full shadow-[0_0_0_3px_#0b0f19,0_2px_10px_rgba(255,74,90,0.45)] whitespace-nowrap">Most Guidance</span>
+        <span>Guided Live</span>
+        <span class="plan-switcher-price"><span id="price-standard-tab">$129</span> / 4 weeks</span>
       </button>
-      <button type="button" class="plan-switcher-btn flex flex-col items-center gap-0.5 max-md:text-[0.85rem] max-md:px-1.5" data-plan="vip" role="tab" aria-selected="false">
-        <span>1-on-1 VIP</span>
-        <span id="price-vip-tab" class="plan-switcher-price">$349</span>
+      <button type="button" class="plan-switcher-btn flex flex-col items-center gap-0.5 max-md:text-[0.85rem] max-md:px-1.5" data-plan="async" role="tab" aria-selected="false">
+        <span class="absolute -top-3 left-1/2 -translate-x-1/2 z-10 bg-accent-blue text-bg-main text-[0.62rem] font-bold uppercase tracking-[0.5px] px-2.5 py-1 rounded-full shadow-[0_0_0_3px_#0b0f19,0_2px_10px_rgba(0,210,255,0.45)] whitespace-nowrap">Most Flexible</span>
+        <span>Assisted Async</span>
+        <span class="plan-switcher-price"><span id="price-async-tab">$65</span> / 4 weeks</span>
       </button>
     </div>
 
     <!-- Cardul Async Mentorship -->
-    <div class="plan-panel hidden bg-[#0f1524] rounded-[20px] border border-[rgba(255,255,255,0.08)] shadow-[0_20px_40px_rgba(0,0,0,0.45)] overflow-hidden" data-plan="async" role="tabpanel">
+    <div class="plan-panel hidden bg-[#0f1524] rounded-[20px] border border-[rgba(0,210,255,0.15)] shadow-[0_20px_40px_rgba(0,0,0,0.45)] overflow-hidden" data-plan="async" role="tabpanel">
       <div class="px-[45px] max-md:px-6 pt-[45px] pb-[15px]">
         <div class="flex flex-row max-md:flex-col-reverse justify-between items-center gap-4 max-md:mb-1">
-          <h3 class="m-0 text-[1.8rem] text-white max-md:text-center font-bold">Async Mentorship</h3>
-          <span class="badge text-[0.75rem] px-3 py-[5px] bg-white/10 text-white text-center font-bold rounded-[20px] tracking-[0.5px] h-fit w-fit whitespace-nowrap">ASYNC</span>
+          <h3 class="m-0 text-[1.8rem] text-white max-md:text-center font-bold">Assisted Async Mentorship</h3>
         </div>
-        <p class="text-text-muted text-[1.05rem] leading-[1.6] mb-[30px] max-md:text-center">Structured, personal guidance. Fully async, on your own schedule.</p>
+        <p class="text-text-muted text-[1.05rem] leading-[1.6] mb-[30px] max-md:text-center">Best if you're self-driven and want full flexibility.</p>
 
         <div class="mt-[15px] mb-2 max-md:text-center leading-tight">
-          <span id="price-async" class="text-[3rem] font-extrabold text-white tracking-[-1px] whitespace-nowrap">$49</span> <span class="text-text-muted text-[1.2rem] whitespace-nowrap">/ 4 weeks</span>
+          <span id="price-async" class="text-[3rem] font-extrabold text-white tracking-[-1px] whitespace-nowrap">$65</span> <span class="text-text-muted text-[1.2rem] whitespace-nowrap">/ 4 weeks</span>
         </div>
-        <p id="price-async-week" class="text-text-muted text-[0.95rem] mt-1 max-md:text-center">Equivalent to $12.25/week</p>
+        <p id="price-async-week" class="text-text-muted text-[0.95rem] mt-1 max-md:text-center">Equivalent to $16.25/week</p>
       </div>
 
       <div class="bg-[rgba(0,0,0,0.15)] px-[45px] max-md:px-6 py-10 border-t border-b border-[rgba(255,255,255,0.03)]">
         <h4 class="text-[rgba(255,255,255,0.4)] text-[0.85rem] font-bold mb-6 tracking-[1.5px] uppercase max-md:text-center">What's included in your program:</h4>
 
-        <ul class="list-none m-0 p-0 grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4">
-          <li class="flex items-start gap-2.5 text-[#cbd5e1] text-[1.05rem] leading-[1.5] before:content-['✓'] before:font-black before:text-accent-red before:leading-[1.5]">
+        <ul class="list-none m-0 p-0 grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
+          <li class="flex items-start gap-2.5 text-[#cbd5e1] text-[1.05rem] leading-[1.5] before:content-['✓'] before:font-black before:text-accent-blue before:leading-[1.5] rounded-xl border border-[rgba(0,210,255,0.25)] bg-[rgba(0,210,255,0.06)] -mx-3 -my-2.5 px-3 py-2.5">
+            <span><strong class="highlight">Weekly Pack & Voice Feedback:</strong> new lessons and exercises every week. I correct your work and answer your questions weekly in a personal voice message.</span>
+          </li>
+          <li class="flex items-start gap-2.5 text-[#cbd5e1] text-[1.05rem] leading-[1.5] before:content-['✓'] before:font-black before:text-accent-blue before:leading-[1.5]">
             <span><strong class="highlight">One-Time Roadmap Session:</strong> at the very start, we build your personalized study plan together on a single live call —&nbsp;just your roadmap to follow from there.</span>
           </li>
-          <li class="flex items-start gap-2.5 text-[#cbd5e1] text-[1.05rem] leading-[1.5] before:content-['✓'] before:font-black before:text-accent-red before:leading-[1.5]">
-            <span><strong class="highlight">Weekly Theory & Practice Pack:</strong> a new written breakdown of that week's grammar and vocab from me, plus practice exercises to complete on your own time.</span>
-          </li>
-          <li class="flex items-start gap-2.5 text-[#cbd5e1] text-[1.05rem] leading-[1.5] before:content-['✓'] before:font-black before:text-accent-red before:leading-[1.5]">
-            <span><strong class="highlight">Async Correction & Q&A:</strong> submit your exercises each week and get personal voice message feedback from me, correcting your work and answering your questions about that week's theory.</span>
-          </li>
-          <li class="flex items-start gap-2.5 text-[#cbd5e1] text-[1.05rem] leading-[1.5] before:content-['✓'] before:font-black before:text-accent-red before:leading-[1.5]">
+          <li class="flex items-start gap-2.5 text-[#cbd5e1] text-[1.05rem] leading-[1.5] before:content-['✓'] before:font-black before:text-accent-blue before:leading-[1.5]">
             <span><strong class="highlight">Custom Kanji & Vocab App:</strong> unlimited access to my spaced-repetition app for learning words and Kanji efficiently on your own time.</span>
+          </li>
+          <li class="flex items-start gap-2.5 text-[#cbd5e1] text-[1.05rem] leading-[1.5] before:content-['✓'] before:font-black before:text-accent-blue before:leading-[1.5]">
+            <span><strong class="highlight">Certificate of Achievement:</strong> after a short level check with me, you can request a diploma certifying your study duration and JLPT-equivalent level.</span>
           </li>
         </ul>
       </div>
 
       <div class="px-[45px] max-md:px-6 pt-[35px] pb-[45px] text-center">
-        <a href="#connect" class="btn-secondary block text-center p-[18px] text-[1.1rem] max-md:w-fit max-md:mx-auto">Start Async Mentorship</a>
+        <a href="#connect" class="btn-primary blue block text-center p-[18px] text-[1.1rem] max-md:w-fit max-md:mx-auto">Start Assisted Async</a>
         <div class="mt-4">
           <span class="block text-text-muted/50 text-[0.7rem] font-bold uppercase tracking-[1.5px] mb-1.5">Or</span>
           <a href="#connect" class="text-[#cbd5e1] text-[0.95rem] underline decoration-white/25 underline-offset-2 hover:text-white hover:decoration-white transition-colors">Give me 15 minutes.<br />I'll take you from zero to actually forming long, real Japanese sentences. Entirely free.</a>
@@ -81,10 +77,9 @@
       <!-- Partea de sus: Detalii și Preț -->
       <div class="px-[45px] max-md:px-6 pt-[45px] pb-[15px]">
         <div class="flex flex-row max-md:flex-col-reverse justify-between items-center gap-4 max-md:mb-1">
-          <h3 class="m-0 text-[1.8rem] text-white max-md:text-center font-bold">Full-Access Mentorship</h3>
-          <span class="badge text-[0.75rem] px-3 py-[5px] bg-accent-red text-white text-center font-bold rounded-[20px] tracking-[0.5px] h-fit w-fit whitespace-nowrap">ALL-INCLUDED</span>
+          <h3 class="m-0 text-[1.8rem] text-white max-md:text-center font-bold">Guided Live Mentorship</h3>
         </div>
-        <p class="text-text-muted text-[1.05rem] leading-[1.6] mb-[30px] max-md:text-center">Bring your motivation with you. Everything else is taken care of.</p>
+        <p class="text-text-muted text-[1.05rem] leading-[1.6] mb-[30px] max-md:text-center">Best if you want accountability and real-time correction.</p>
 
         <!-- Prețuri Dinamice -->
         <div class="mt-[15px] mb-2 max-md:text-center leading-tight">
@@ -97,12 +92,12 @@
       <div class="bg-[rgba(0,0,0,0.15)] px-[45px] max-md:px-6 py-10 border-t border-b border-[rgba(255,255,255,0.03)]">
         <h4 class="text-[rgba(255,255,255,0.4)] text-[0.85rem] font-bold mb-6 tracking-[1.5px] uppercase max-md:text-center">What's included in your program:</h4>
 
-        <ul class="list-none m-0 p-0 grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4">
-          <li class="flex items-start gap-2.5 text-[#cbd5e1] text-[1.05rem] leading-[1.5] before:content-['✓'] before:font-black before:text-accent-red before:leading-[1.5]">
-            <span><strong class="highlight">One-Time Roadmap Session:</strong> at the very start, we build your personalized study plan together on a single live call —&nbsp;just your roadmap to follow from there.</span>
+        <ul class="list-none m-0 p-0 grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
+          <li class="flex items-start gap-2.5 text-[#cbd5e1] text-[1.05rem] leading-[1.5] before:content-['✓'] before:font-black before:text-accent-red before:leading-[1.5] rounded-xl border border-[rgba(255,74,90,0.25)] bg-[rgba(255,74,90,0.07)] -mx-3 -my-2.5 px-3 py-2.5">
+            <span><strong class="highlight">4 Premium 1-Hour Live Sessions:</strong> shared with 2 other students, but always 1-on-1 in your own private voice channel. I rotate between channels within the hour, based on my <a href="#methodology"><u>Three-Pillar System</u></a>.</span>
           </li>
           <li class="flex items-start gap-2.5 text-[#cbd5e1] text-[1.05rem] leading-[1.5] before:content-['✓'] before:font-black before:text-accent-red before:leading-[1.5]">
-            <span><strong class="highlight">4 Premium 1-Hour Live Sessions:</strong> shared with 2 other students, but always 1-on-1 in your own private voice channel. I rotate between channels within the hour, based on my <a href="#methodology"><u>Three-Pillar System</u></a>.</span>
+            <span><strong class="highlight">One-Time Roadmap Session:</strong> at the very start, we build your personalized study plan together on a single live call —&nbsp;just your roadmap to follow from there.</span>
           </li>
           <li class="flex items-start gap-2.5 text-[#cbd5e1] text-[1.05rem] leading-[1.5] before:content-['✓'] before:font-black before:text-accent-red before:leading-[1.5]">
             <span><strong class="highlight">Custom Kanji & Vocab App:</strong> unlimited access to my spaced-repetition app for learning words and Kanji efficiently on your own time.</span>
@@ -115,51 +110,7 @@
 
       <!-- Partea de jos: Butonul principal pus ca o concluzie curată -->
       <div class="px-[45px] max-md:px-6 pt-[35px] pb-[45px] text-center">
-        <a href="#connect" class="btn-primary block text-center p-[18px] text-[1.1rem] max-md:w-fit max-md:mx-auto">Join the Mentorship</a>
-        <div class="mt-4">
-          <span class="block text-text-muted/50 text-[0.7rem] font-bold uppercase tracking-[1.5px] mb-1.5">Or</span>
-          <a href="#connect" class="text-[#cbd5e1] text-[0.95rem] underline decoration-white/25 underline-offset-2 hover:text-white hover:decoration-white transition-colors">Give me 15 minutes.<br />I'll take you from zero to actually forming long, real Japanese sentences. Entirely free.</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- Cardul VIP (1-on-1) -->
-    <div class="plan-panel hidden bg-[#0f1524] rounded-[20px] border border-[rgba(255,74,90,0.15)] shadow-[0_20px_40px_rgba(0,0,0,0.45)] overflow-hidden" data-plan="vip" role="tabpanel">
-
-      <div class="px-[45px] max-md:px-6 pt-[45px] pb-[15px]">
-        <div class="flex flex-row max-md:flex-col-reverse justify-between items-center gap-4 max-md:mb-1">
-          <h3 class="m-0 text-[1.8rem] text-white max-md:text-center font-bold">1-on-1 VIP Mentorship</h3>
-          <span class="badge text-[0.75rem] px-3 py-[5px] bg-accent-red text-white text-center font-bold rounded-[20px] tracking-[0.5px] h-fit w-fit whitespace-nowrap">VIP</span>
-        </div>
-        <p class="text-text-muted text-[1.05rem] leading-[1.6] mb-[30px] max-md:text-center">Maximum focus. Every minute of every session belongs to you alone.</p>
-
-        <div class="mt-[15px] mb-2 max-md:text-center leading-tight">
-          <span id="price-vip" class="text-[3rem] font-extrabold text-white tracking-[-1px] whitespace-nowrap">$349</span> <span class="text-text-muted text-[1.2rem] whitespace-nowrap">/ 4 weeks</span>
-        </div>
-        <p id="price-vip-week" class="text-text-muted text-[0.95rem] mt-1 max-md:text-center">Equivalent to $87.25/week</p>
-      </div>
-
-      <div class="bg-[rgba(0,0,0,0.15)] px-[45px] max-md:px-6 py-10 border-t border-b border-[rgba(255,255,255,0.03)]">
-        <h4 class="text-[rgba(255,255,255,0.4)] text-[0.85rem] font-bold mb-6 tracking-[1.5px] uppercase max-md:text-center">Everything above, upgraded:</h4>
-
-        <ul class="list-none m-0 p-0 grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4">
-          <li class="flex items-start gap-2.5 text-[#cbd5e1] text-[1.05rem] leading-[1.5] before:content-['✓'] before:font-black before:text-accent-red before:leading-[1.5]">
-            <span><strong class="highlight">One-Time Roadmap Session:</strong> at the very start, we build your personalized study plan together on a single live call —&nbsp;just your roadmap to follow from there.</span>
-          </li>
-          <li class="flex items-start gap-2.5 text-[#cbd5e1] text-[1.05rem] leading-[1.5] before:content-['✓'] before:font-black before:text-accent-gold before:leading-[1.5]">
-            <span><strong class="highlight">4 Premium 1-Hour Live Sessions, 100% Private:</strong> your full hour with me, one-on-one, every week —&nbsp;not shared with other students, based on my <a href="#methodology"><u>Three-Pillar System</u></a>.</span>
-          </li>
-          <li class="flex items-start gap-2.5 text-[#cbd5e1] text-[1.05rem] leading-[1.5] before:content-['✓'] before:font-black before:text-accent-red before:leading-[1.5]">
-            <span><strong class="highlight">Custom Kanji & Vocab App:</strong> unlimited access to my spaced-repetition app for learning words and Kanji efficiently on your own time.</span>
-          </li>
-          <li class="flex items-start gap-2.5 text-[#cbd5e1] text-[1.05rem] leading-[1.5] before:content-['✓'] before:font-black before:text-accent-red before:leading-[1.5]">
-            <span><strong class="highlight">Certificate of Achievement:</strong> you can request a diploma certifying your study duration and JLPT-equivalent level.</span>
-          </li>
-        </ul>
-      </div>
-
-      <div class="px-[45px] max-md:px-6 pt-[35px] pb-[45px] text-center">
-        <a href="#connect" class="btn-primary block text-center p-[18px] text-[1.1rem] max-md:w-fit max-md:mx-auto">Go VIP</a>
+        <a href="#connect" class="btn-primary block text-center p-[18px] text-[1.1rem] max-md:w-fit max-md:mx-auto">Start Guided Live</a>
         <div class="mt-4">
           <span class="block text-text-muted/50 text-[0.7rem] font-bold uppercase tracking-[1.5px] mb-1.5">Or</span>
           <a href="#connect" class="text-[#cbd5e1] text-[0.95rem] underline decoration-white/25 underline-offset-2 hover:text-white hover:decoration-white transition-colors">Give me 15 minutes.<br />I'll take you from zero to actually forming long, real Japanese sentences. Entirely free.</a>

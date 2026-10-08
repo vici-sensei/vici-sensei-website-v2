@@ -11,7 +11,7 @@ export const methodologyItems: MethodologyItem[] = [
     accent: '#00d2ff',
     title: 'The Structural Pillar',
     description:
-      'In the live sessions we use a <strong class="highlight">structure-first approach</strong>, breaking down Japanese grammar into a <strong class="highlight">precise, logical system</strong> with clear rules of construction. You will understand exactly how sentences are built so you can create your own correct sentences from scratch.',
+      'Our method uses a <strong class="highlight">structure-first approach</strong>, breaking down Japanese grammar into a <strong class="highlight">precise, logical system</strong> with clear rules of construction. You will understand exactly how sentences are built so you can create your own correct sentences from scratch.',
   },
   {
     num: 'PILLAR 02',
@@ -25,6 +25,6 @@ export const methodologyItems: MethodologyItem[] = [
     accent: '#00ff66',
     title: 'The Grinding Pillar',
     description:
-      'Our live session time is too valuable to spend repeating words. You use our <strong class="highlight">dedicated vocabulary app</strong> (built on a <strong class="highlight">spaced repetition system</strong>) to learn words and Kanji on your own, efficiently. This ensures long-term retention with optimal daily effort.',
+      'Our live session/async feedback time is too valuable to spend repeating words. You use our <strong class="highlight">dedicated vocabulary app</strong> (built on a <strong class="highlight">spaced repetition system</strong>) to learn words and Kanji on your own, efficiently. This ensures long-term retention with optimal daily effort.',
   },
 ];

@@ -34,10 +34,10 @@ const PRICES: Record<'RO' | 'EU' | 'GB' | 'US', {
     standardWeek: 'Equivalent to €32.25/week',
   },
   GB: {
-    async: '£65',
-    asyncWeek: 'Equivalent to £16.25/week',
-    standard: '£129',
-    standardWeek: 'Equivalent to £32.25/week',
+    async: '£59',
+    asyncWeek: 'Equivalent to £14.75/week',
+    standard: '£119',
+    standardWeek: 'Equivalent to £29.75/week',
   },
   US: {
     async: '$65',

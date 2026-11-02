@@ -234,6 +234,33 @@
     @apply absolute inset-x-0 bottom-0 pb-4 pt-14 text-[0.95rem] font-bold text-white max-sm:pb-3 max-sm:pt-10 max-sm:text-[0.85rem];
     background: linear-gradient(to top, rgb(11 15 25 / 0.9), transparent);
   }
+  /* Wide screens: copy on the left, video on the right. Below 1100px the
+     columns get too narrow for the headline, so it stays stacked and centred. */
+  @media (min-width: 1100px) {
+    .hero-section {
+      @apply text-left;
+      padding-top: 160px;
+    }
+    .hero-container {
+      /* Same width and inner padding as the nav, so the copy lines up with the logo. */
+      @apply grid w-full max-w-[1100px] items-center px-6;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+      column-gap: clamp(40px, 4vw, 64px);
+    }
+    /* Keeps "Japanese For The" on one line in the narrower column. */
+    .hero-title {
+      font-size: clamp(3rem, 3.9vw, 3.6rem);
+    }
+    .hero-line-main {
+      @apply mx-0 px-0;
+    }
+    .hero-cta-group {
+      @apply justify-start;
+    }
+    .hero-video {
+      @apply m-0 max-w-none;
+    }
+  }
   .video-modal-overlay {
     @apply fixed inset-0 z-[2000] flex items-center justify-center p-5 opacity-0 invisible max-sm:p-3;
     background: rgb(0 0 0 / 0.85);

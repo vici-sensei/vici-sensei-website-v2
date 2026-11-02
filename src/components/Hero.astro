@@ -1,4 +1,5 @@
 ---
+import { Icon } from 'astro-icon/components';
 ---
 
 <header class="hero-section">
@@ -6,12 +7,66 @@
     <span class="badge first-badge">NOW ACCEPTING GLOBAL SEATS</span>
     <h1 class="hero-title">Japanese For The <br />Logic-Driven.</h1>
     <div class="hero-text-stack">
-      <p class="hero-line-main">I guide motivated minds towards fluency through my <strong>structure-first</strong> live sessions/async feedback and <strong>carefully designed</strong> learning environment.</p>
+      <p class="hero-line-main">I guide motivated minds towards fluency through my <strong>structure-first</strong> <strong>live sessions</strong>/async feedback and <strong>carefully designed</strong> learning environment.</p>
       <p class="hero-line-italic">Passion beats talent. Add structure, and you're unstoppable.</p>
     </div>
     <div class="hero-cta-group">
       <a href="#pricing" class="btn-primary w-fit max-sm:w-full px-8">Apply For A Seat</a>
       <a href="#roadmap" class="btn-secondary w-fit max-sm:w-full px-8">View My 16-Year Journey</a>
     </div>
+    <button type="button" class="hero-video" id="heroVideoOpen" aria-haspopup="dialog" aria-controls="heroVideoOverlay">
+      <img src="/videos/presentation-poster.jpg" alt="" width="1600" height="900" decoding="async" class="hero-video-poster" />
+      <span class="hero-video-play" aria-hidden="true">
+        <Icon name="mdi:play" class="h-9 w-9 translate-x-[2px] max-sm:h-7 max-sm:w-7" />
+      </span>
+      <span class="hero-video-label">Watch the 2-min presentation</span>
+    </button>
   </div>
 </header>
+
+<div class="video-modal-overlay" id="heroVideoOverlay" role="dialog" aria-modal="true" aria-label="Vici Sensei presentation video">
+  <div class="video-modal">
+    <button class="video-modal-close" data-close aria-label="Close video" type="button">
+      <Icon name="mdi:close" class="h-6 w-6" aria-hidden="true" />
+    </button>
+    <!-- preload="none": nothing is downloaded until the visitor presses play. -->
+    <video class="video-modal-player" id="heroVideo" controls playsinline preload="none" poster="/videos/presentation-poster.jpg">
+      <source src="/videos/presentation.mp4" type="video/mp4" />
+    </video>
+    <a href="#pricing" class="btn-primary w-fit max-sm:w-full px-8" data-video-cta>Apply For A Seat</a>
+  </div>
+</div>
+
+<script>
+  const openBtn = document.getElementById('heroVideoOpen');
+  const overlay = document.getElementById('heroVideoOverlay');
+  const video = document.getElementById('heroVideo') as HTMLVideoElement | null;
+  const closeBtn = overlay?.querySelector<HTMLButtonElement>('[data-close]');
+
+  function openVideo() {
+    overlay?.classList.add('open');
+    document.body.classList.add('overflow-hidden');
+    closeBtn?.focus();
+    // Opened by a click, so the browser lets it play with sound.
+    video?.play().catch(() => {});
+  }
+
+  function closeVideo(restoreFocus = true) {
+    if (!overlay?.classList.contains('open')) return;
+    video?.pause();
+    overlay.classList.remove('open');
+    document.body.classList.remove('overflow-hidden');
+    if (restoreFocus) openBtn?.focus();
+  }
+
+  openBtn?.addEventListener('click', openVideo);
+  closeBtn?.addEventListener('click', () => closeVideo());
+  overlay?.addEventListener('click', (e) => {
+    if (e.target === overlay) closeVideo();
+  });
+  // The CTA scrolls to #pricing, so don't pull focus (and the page) back up to the hero.
+  overlay?.querySelector('[data-video-cta]')?.addEventListener('click', () => closeVideo(false));
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeVideo();
+  });
+</script>

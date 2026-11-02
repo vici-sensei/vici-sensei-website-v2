@@ -171,6 +171,99 @@
     margin-top: clamp(28px, 6vw, 40px);
   }
 
+  /* HERO VIDEO — thumbnail that opens the presentation in a modal. */
+  .hero-video {
+    @apply relative mx-auto block w-full max-w-[720px] cursor-pointer overflow-hidden rounded-2xl border border-border-soft p-0;
+    margin-top: clamp(40px, 7vw, 64px);
+    aspect-ratio: 16 / 9;
+    background: var(--color-bg-main);
+    box-shadow: 0 20px 60px rgb(0 0 0 / 0.5), 0 0 40px rgb(255 74 90 / 0.12);
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  }
+  .hero-video:hover {
+    transform: translateY(-3px);
+    border-color: rgb(255 74 90 / 0.35);
+    box-shadow: 0 24px 70px rgb(0 0 0 / 0.55), 0 0 60px rgb(255 74 90 / 0.25);
+  }
+  .hero-video-poster {
+    @apply absolute inset-0 h-full w-full object-cover;
+    transition: transform 0.4s ease;
+  }
+  .hero-video:hover .hero-video-poster {
+    transform: scale(1.03);
+  }
+  /* Sits on the red sun of the torii in the poster frame. */
+  .hero-video-play {
+    @apply absolute left-1/2 top-[46%] flex h-[76px] w-[76px] -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full text-white max-sm:h-14 max-sm:w-14;
+    background: var(--color-accent-red);
+    border: 3px solid rgb(255 255 255 / 0.9);
+    box-shadow: 0 0 30px rgb(255 74 90 / 0.6);
+    transition: transform 0.25s ease;
+  }
+  .hero-video:hover .hero-video-play {
+    transform: scale(1.08);
+  }
+  .hero-video-play::before,
+  .hero-video-play::after {
+    content: '';
+    @apply absolute -inset-[3px] rounded-full;
+    border: 2px solid rgb(255 255 255 / 0.7);
+    animation: hero-video-pulse 2.4s ease-out infinite;
+  }
+  .hero-video-play::after {
+    animation-delay: 1.2s;
+  }
+  @keyframes hero-video-pulse {
+    from {
+      transform: scale(1);
+      opacity: 0.8;
+    }
+    to {
+      transform: scale(1.9);
+      opacity: 0;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .hero-video-play::before,
+    .hero-video-play::after {
+      animation: none;
+      opacity: 0;
+    }
+  }
+  .hero-video-label {
+    @apply absolute inset-x-0 bottom-0 pb-4 pt-14 text-[0.95rem] font-bold text-white max-sm:pb-3 max-sm:pt-10 max-sm:text-[0.85rem];
+    background: linear-gradient(to top, rgb(11 15 25 / 0.9), transparent);
+  }
+  .video-modal-overlay {
+    @apply fixed inset-0 z-[2000] flex items-center justify-center p-5 opacity-0 invisible max-sm:p-3;
+    background: rgb(0 0 0 / 0.85);
+    backdrop-filter: blur(6px);
+    /* Hide only after the fade-out, but show at once on open so the close button can take focus. */
+    transition: opacity 0.25s ease, visibility 0s linear 0.25s;
+  }
+  .video-modal-overlay.open {
+    @apply opacity-100 visible;
+    transition-delay: 0s;
+  }
+  .video-modal {
+    @apply relative flex w-full flex-col items-center gap-5;
+    /* Fit short landscape screens: leave room for the close button and CTA. */
+    max-width: min(1100px, calc((100dvh - 190px) * 16 / 9));
+  }
+  .video-modal-player {
+    @apply block w-full rounded-xl bg-black;
+    aspect-ratio: 16 / 9;
+    box-shadow: 0 0 60px rgb(255 74 90 / 0.15);
+  }
+  .video-modal-close {
+    @apply absolute -top-12 right-0 flex h-10 w-10 items-center justify-center rounded-full text-text-muted;
+    transition: background 0.2s ease, color 0.2s ease;
+  }
+  .video-modal-close:hover {
+    @apply text-white;
+    background: rgb(255 255 255 / 0.08);
+  }
+
   .btn-primary {
     @apply text-white font-bold rounded-xl px-9 py-4 text-[1.05rem];
     background: var(--color-accent-red);

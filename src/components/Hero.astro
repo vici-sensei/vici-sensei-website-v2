@@ -8,12 +8,13 @@ import { Icon } from 'astro-icon/components';
       <span class="badge first-badge">NOW ACCEPTING GLOBAL SEATS</span>
       <h1 class="hero-title">Japanese For The <br />Logic-Driven.</h1>
       <div class="hero-text-stack">
-        <p class="hero-line-main">I guide motivated minds towards fluency through my <strong>structure-first</strong> <strong>live sessions</strong>/async feedback and <strong>carefully designed</strong> learning environment.</p>
-        <p class="hero-line-italic">Passion beats talent. Add structure, and you're unstoppable.</p>
+        <p class="hero-line-main">I guide motivated minds towards fluency through <strong>structure-first live sessions</strong> and <strong>async feedback</strong>.</p>
+        <!-- Hidden on phones so the video thumbnail fits on the first screen. -->
+        <p class="hero-line-italic max-sm:hidden">Passion beats talent. Add structure, and you're unstoppable.</p>
       </div>
       <div class="hero-cta-group">
         <a href="#pricing" class="btn-primary w-fit max-sm:w-full px-8">Apply For A Seat</a>
-        <a href="#roadmap" class="btn-secondary w-fit max-sm:w-full px-8">View My 16-Year Journey</a>
+        <a href="#roadmap" class="btn-secondary w-fit max-sm:w-full px-8">View My 16-Year Journey<span class="hidden max-sm:inline" aria-hidden="true"> →</span></a>
       </div>
     </div>
     <button type="button" class="hero-video" id="heroVideoOpen" aria-haspopup="dialog" aria-controls="heroVideoOverlay">

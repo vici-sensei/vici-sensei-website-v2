@@ -25,6 +25,6 @@ export const methodologyItems: MethodologyItem[] = [
     accent: '#00ff66',
     title: 'The Grinding Pillar',
     description:
-      'Our live session/async feedback time is too valuable to spend repeating words. You use our <strong class="highlight">dedicated vocabulary app</strong> (built on a <strong class="highlight">spaced repetition system</strong>) to learn words and Kanji on your own, efficiently. This ensures long-term retention with optimal daily effort.',
+      'Our time in live sessions and async feedback is too valuable to spend repeating words. You use our <strong class="highlight">dedicated vocabulary app</strong> (built on a <strong class="highlight">spaced repetition system</strong>) to learn words and Kanji on your own, efficiently. This ensures long-term retention with optimal daily effort.',
   },
 ];

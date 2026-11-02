@@ -322,12 +322,27 @@
   /* 480px overrides must come after the base rules above so they win the cascade. */
   @media (max-width: 480px) {
     .hero-cta-group {
-      gap: 12px;
+      gap: 4px;
     }
     .btn-primary,
     .btn-secondary {
       @apply w-full text-center;
       padding: 16px 0;
+    }
+    /* Phones: the journey button becomes a quiet text link, so "Apply For A Seat"
+       stands alone and the video thumbnail moves up onto the first screen. */
+    .hero-cta-group .btn-secondary {
+      @apply border-0 bg-transparent text-[0.95rem] font-semibold text-text-muted;
+      padding: 10px 0;
+    }
+    .hero-cta-group .btn-secondary:hover {
+      @apply bg-transparent text-white;
+    }
+    .hero-section {
+      padding-top: 90px;
+    }
+    .hero-video {
+      margin-top: 24px;
     }
   }
 
